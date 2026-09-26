@@ -74,7 +74,9 @@ Replace `parul_birthday_2026` with your repository name. Deploy the **`dist/`** 
    - **GitHub Actions:** push to `main`/`master` — workflow [`.github/workflows/pages.yml`](./.github/workflows/pages.yml) builds with the correct `BASE_PATH` and deploys. In **Settings → Pages**, set source to **GitHub Actions**.  
    - **Manual:** `BASE_PATH=/YOUR_REPO_NAME/ npm run build`, then upload `dist/` (gh-pages branch or Pages branch folder).
 
-4. First deploy: enable **Settings → Pages → Build and deployment → GitHub Actions**.
+4. First deploy: enable **Settings → Pages → Build and deployment → Source: GitHub Actions** (not “Deploy from a branch”).
+
+5. Commit **`package-lock.json`** — CI uses `npm ci` and will fail without it.
 
 5. **WhatsApp preview:** in `index.html`, set:
    ```html

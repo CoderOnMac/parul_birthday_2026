@@ -1,3 +1,4 @@
+import "./styles.css";
 import gameConfig from "../config.js";
 
 const app = document.getElementById("app");
@@ -374,5 +375,22 @@ function resetExperience() {
   render();
 }
 
-applyDocumentMeta();
-render();
+function showFatalError() {
+  app.innerHTML = `
+    <section class="screen screen--error" aria-live="polite">
+      <p class="headline">Something didn't load quite right.</p>
+      <p class="text-muted">Try refreshing the page, or open the link again in a moment.</p>
+    </section>
+  `;
+}
+
+try {
+  if (!gameConfig?.questions?.length) {
+    throw new Error("Game configuration is missing questions.");
+  }
+  applyDocumentMeta();
+  render();
+} catch (error) {
+  console.error(error);
+  showFatalError();
+}
