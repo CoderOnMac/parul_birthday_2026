@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f7f4f1"/>
+  <text x="100" y="280" font-family="Georgia, serif" font-size="72" fill="#1a1816" font-style="italic">I made something</text>
+  <text x="100" y="370" font-family="system-ui, sans-serif" font-size="56" fill="#1a1816" font-weight="600">for you.</text>
+  <text x="100" y="460" font-family="system-ui, sans-serif" font-size="28" fill="#6b6560">Five questions. No cheating.</text>
+  <circle cx="1050" cy="120" r="48" fill="#c4a098" opacity="0.35"/>
+</svg>
