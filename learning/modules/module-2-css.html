@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 2: CSS - Learning Center</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #f8f6f4; --bg-elevated: #ffffff; --text: #1a1816; --text-muted: #6b6560;
+      --accent: #c4a098; --accent-soft: rgba(196, 160, 152, 0.1); --border: rgba(26, 24, 22, 0.08);
+      --shadow: 0 4px 20px rgba(26, 24, 22, 0.08); --radius: 12px;
+      --font-sans: system-ui, -apple-system, "SF Pro Text", "Segoe UI", Inter, sans-serif;
+      --font-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+    }
+    body { font-family: var(--font-sans); background: var(--bg); color: var(--text); line-height: 1.7; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    .nav { margin-bottom: 2rem; }
+    .nav a { color: var(--accent); text-decoration: none; font-weight: 500; }
+    h1 { font-size: 2.5rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+    .subtitle { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem; }
+    .section { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-bottom: 2rem; }
+    h2 { font-size: 1.75rem; font-weight: 600; margin-bottom: 1rem; }
+    h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.75rem; margin-top: 1.5rem; }
+    p { margin-bottom: 1rem; }
+    code { font-family: var(--font-mono); background: var(--accent-soft); padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+    pre { background: #1a1816; color: #f8f6f4; padding: 1.5rem; border-radius: var(--radius); overflow-x: auto; margin: 1rem 0; }
+    pre code { background: none; padding: 0; color: inherit; }
+    .key-point { background: linear-gradient(135deg, var(--accent-soft), transparent); border-left: 4px solid var(--accent); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .key-point strong { display: block; margin-bottom: 0.5rem; color: var(--accent); }
+    .file-ref { background: var(--accent-soft); padding: 0.75rem 1rem; border-radius: var(--radius); margin: 1rem 0; font-family: var(--font-mono); font-size: 0.85rem; }
+    .file-ref strong { display: block; margin-bottom: 0.25rem; color: var(--accent); }
+    .progress-bar { background: var(--border); height: 4px; border-radius: 999px; margin: 2rem 0; overflow: hidden; }
+    .progress-fill { background: var(--accent); height: 100%; width: 27%; border-radius: 999px; }
+    .next-nav { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; border-top: 1px solid var(--border); margin-top: 2rem; }
+    .next-nav a { background: var(--bg-elevated); border: 1px solid var(--border); padding: 0.75rem 1.5rem; border-radius: var(--radius); text-decoration: none; color: var(--text); font-weight: 500; }
+    .next-nav a:hover { border-color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav"><a href="../index.html">← Back to Learning Center</a></div>
+    <h1>Module 2: CSS</h1>
+    <p class="subtitle">Styling, layout, animations, and design tokens</p>
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+
+    <div class="section">
+      <h2>What is CSS?</h2>
+      <p><strong>CSS</strong> (Cascading Style Sheets) is the language used to style HTML documents. It controls the visual presentation: colors, fonts, layout, spacing, animations, and responsive design.</p>
+      <div class="key-point">
+        <strong>Key Concept</strong>
+        CSS separates content (HTML) from presentation (CSS). This separation makes it easy to change the look without changing the structure.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>CSS in This Application</h2>
+      <p>All CSS is in <code>src/styles.css</code>. It uses CSS custom properties (variables) for a design token system.</p>
+      <div class="file-ref">
+        <strong>src/styles.css (lines 2-22)</strong>
+        <code>:root {<br>  --bg: #f7f4f1;<br>  --text: #1a1816;<br>  --accent: #c4a098;<br>  --radius: 16px;<br>  --transition: 0.45s cubic-bezier(0.22, 1, 0.36, 1);<br>}</code>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Selectors</h2>
+      <p>Selectors determine which HTML elements to style.</p>
+      <h3>Element Selector</h3>
+      <pre><code>body { background: #f7f4f1; }</code></pre>
+      <div class="file-ref"><strong>src/styles.css (line 35)</strong>Styles the body element.</div>
+      <h3>Class Selector</h3>
+      <pre><code>.btn { padding: 0.9rem 1.6rem; }</code></pre>
+      <div class="file-ref"><strong>src/styles.css (line 127)</strong>Styles all elements with class "btn".</div>
+      <h3>ID Selector</h3>
+      <pre><code>#app { min-height: 100dvh; }</code></pre>
+      <div class="file-ref"><strong>src/styles.css (line 56)</strong>Styles the element with id "app".</div>
+      <h3>Descendant Selector</h3>
+      <pre><code>.screen__content p { margin-bottom: 1rem; }</code></pre>
+    </div>
+
+    <div class="section">
+      <h2>CSS Custom Properties (Variables)</h2>
+      <p>CSS variables allow you to define reusable values.</p>
+      <pre><code>:root {<br>  --bg: #f7f4f1;<br>  --text: #1a1816;<br>}</code></pre>
+      <div class="file-ref">
+        <strong>src/styles.css (lines 2-22)</strong>
+        This application uses CSS variables for all colors, spacing, and other design tokens. This makes it easy to theme the application.
+      </div>
+      <div class="key-point">
+        <strong>Why Variables?</strong>
+        Variables make it easy to maintain consistent design and enable theming. Change a variable in one place, and it updates everywhere it's used.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Box Model</h2>
+      <p>Every element is a rectangular box. The box model consists of:</p>
+      <ul>
+        <li><strong>Content</strong> — The actual content</li>
+        <li><strong>Padding</strong> — Space between content and border</li>
+        <li><strong>Border</strong> — A border around the padding</li>
+        <li><strong>Margin</strong> — Space outside the border</li>
+      </ul>
+      <pre><code>.option-card {<br>  padding: 1rem 1.15rem;<br>  border: 1px solid var(--border);<br>  border-radius: var(--radius);<br>}</code></pre>
+      <div class="file-ref"><strong>src/styles.css (lines 206-215)</strong>The option cards use padding, border, and border-radius.</div>
+    </div>
+
+    <div class="section">
+      <h2>Flexbox</h2>
+      <p>Flexbox is a one-dimensional layout method for arranging items in rows or columns.</p>
+      <pre><code>.app {<br>  display: flex;<br>  flex-direction: column;<br>}</code></pre>
+      <div class="file-ref"><strong>src/styles.css (lines 56-59)</strong>The main app container uses flexbox to arrange content vertically.</div>
+      <pre><code>.options {<br>  display: flex;<br>  flex-direction: column;<br>  gap: var(--space-sm);<br>}</code></pre>
+      <div class="file-ref"><strong>src/styles.css (lines 200-204)</strong>The options list uses flexbox with gap for spacing between options.</div>
+    </div>
+
+    <div class="section">
+      <h2>Transitions and Animations</h2>
+      <p>CSS transitions and animations add motion to the interface.</p>
+      <h3>Transitions</h3>
+      <pre><code>.btn {<br>  transition: transform 0.25s ease, box-shadow 0.25s ease;<br>}</code></pre>
+      <div class="file-ref"><strong>src/styles.css (line 134)</strong>Buttons have smooth transitions on hover.</div>
+      <h3>Keyframe Animations</h3>
+      <pre><code>@keyframes fadeUp {<br>  from { opacity: 0; transform: translateY(10px); }<br>  to { opacity: 1; transform: translateY(0); }<br>}</code></pre>
+      <div class="file-ref"><strong>src/styles.css (lines 472-481)</strong>The fadeUp animation is used for entrance animations.</div>
+    </div>
+
+    <div class="section">
+      <h2>Responsive Design</h2>
+      <p>Media queries allow different styles for different screen sizes.</p>
+      <pre><code>@media (min-width: 768px) {<br>  :root { --max-width: 32rem; }<br>}</code></pre>
+      <div class="file-ref"><strong>src/styles.css (lines 541-544)</strong>On wider screens, the max-width increases.</div>
+      <div class="key-point">
+        <strong>Mobile-First Approach</strong>
+        The application uses a mobile-first approach: styles are written for mobile first, then media queries add styles for larger screens.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Reduced Motion</h2>
+      <p>The application respects user's motion preferences.</p>
+      <pre><code>@media (prefers-reduced-motion: reduce) {<br>  *, *::before, *::after {<br>    animation-duration: 0.01ms !important;<br>    transition-duration: 0.01ms !important;<br>  }<br>}</code></pre>
+      <div class="file-ref"><strong>src/styles.css (lines 522-538)</strong>When users prefer reduced motion, animations and transitions are disabled.</div>
+    </div>
+
+    <div class="section">
+      <h2>MCQ: Test Your Knowledge</h2>
+      <h3>Question 1</h3>
+      <p>What does CSS stand for?</p>
+      <ul><li>A) Computer Style Sheets</li><li>B) Cascading Style Sheets</li><li>C) Creative Style Sheets</li><li>D) Colorful Style Sheets</li></ul>
+      <p><strong>Answer:</strong> B</p>
+      <p><strong>Explanation:</strong> CSS stands for Cascading Style Sheets. The "cascading" refers to how styles are applied based on specificity and inheritance.</p>
+
+      <h3>Question 2</h3>
+      <p>Which CSS property is used to change text color?</p>
+      <ul><li>A) text-color</li><li>B) font-color</li><li>C) color</li><li>D) foreground</li></ul>
+      <p><strong>Answer:</strong> C</p>
+      <p><strong>Explanation:</strong> The <code>color</code> property sets the text color. Background color is set with <code>background-color</code>.</p>
+
+      <h3>Question 3</h3>
+      <p>What is the purpose of CSS custom properties (variables)?</p>
+      <ul><li>A) To add animations</li><li>B) To define reusable values</li><li>C) To create layouts</li><li>D) To add interactivity</li></ul>
+      <p><strong>Answer:</strong> B</p>
+      <p><strong>Explanation:</strong> CSS variables allow you to define reusable values like colors, spacing, and fonts, making it easier to maintain and theme your CSS.</p>
+    </div>
+
+    <div class="section">
+      <h2>Interview Question</h2>
+      <p><strong>Question:</strong> What is the difference between Flexbox and Grid?</p>
+      <p><strong>Answer:</strong> Flexbox is a one-dimensional layout system (either rows or columns), while Grid is a two-dimensional layout system (rows and columns simultaneously). Flexbox is best for arranging items in a line and distributing space, while Grid is best for complex two-dimensional layouts. This application uses Flexbox because the layout is primarily one-dimensional (vertical stacking of content).</p>
+    </div>
+
+    <div class="section">
+      <h2>Summary</h2>
+      <p>In this module, you learned:</p>
+      <ul>
+        <li>CSS selectors (element, class, ID, descendant)</li>
+        <li>CSS custom properties (variables)</li>
+        <li>Box model (margin, padding, border)</li>
+        <li>Flexbox layout</li>
+        <li>Transitions and animations</li>
+        <li>Responsive design with media queries</li>
+        <li>Reduced motion support</li>
+        <li>How this application uses CSS for a cohesive design system</li>
+      </ul>
+    </div>
+
+    <div class="next-nav">
+      <a href="module-1-html.html">← Module 1</a>
+      <a href="module-3-javascript.html">Module 3: JavaScript →</a>
+    </div>
+  </div>
+</body>
+</html>

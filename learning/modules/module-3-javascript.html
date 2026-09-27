@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 3: JavaScript - Learning Center</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #f8f6f4; --bg-elevated: #ffffff; --text: #1a1816; --text-muted: #6b6560;
+      --accent: #c4a098; --accent-soft: rgba(196, 160, 152, 0.1); --border: rgba(26, 24, 22, 0.08);
+      --shadow: 0 4px 20px rgba(26, 24, 22, 0.08); --radius: 12px;
+      --font-sans: system-ui, -apple-system, "SF Pro Text", "Segoe UI", Inter, sans-serif;
+      --font-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+    }
+    body { font-family: var(--font-sans); background: var(--bg); color: var(--text); line-height: 1.7; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    .nav { margin-bottom: 2rem; }
+    .nav a { color: var(--accent); text-decoration: none; font-weight: 500; }
+    h1 { font-size: 2.5rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+    .subtitle { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem; }
+    .section { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-bottom: 2rem; }
+    h2 { font-size: 1.75rem; font-weight: 600; margin-bottom: 1rem; }
+    h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.75rem; margin-top: 1.5rem; }
+    p { margin-bottom: 1rem; }
+    code { font-family: var(--font-mono); background: var(--accent-soft); padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+    pre { background: #1a1816; color: #f8f6f4; padding: 1.5rem; border-radius: var(--radius); overflow-x: auto; margin: 1rem 0; }
+    pre code { background: none; padding: 0; color: inherit; }
+    .key-point { background: linear-gradient(135deg, var(--accent-soft), transparent); border-left: 4px solid var(--accent); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .key-point strong { display: block; margin-bottom: 0.5rem; color: var(--accent); }
+    .file-ref { background: var(--accent-soft); padding: 0.75rem 1rem; border-radius: var(--radius); margin: 1rem 0; font-family: var(--font-mono); font-size: 0.85rem; }
+    .file-ref strong { display: block; margin-bottom: 0.25rem; color: var(--accent); }
+    .progress-bar { background: var(--border); height: 4px; border-radius: 999px; margin: 2rem 0; overflow: hidden; }
+    .progress-fill { background: var(--accent); height: 100%; width: 36%; border-radius: 999px; }
+    .next-nav { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; border-top: 1px solid var(--border); margin-top: 2rem; }
+    .next-nav a { background: var(--bg-elevated); border: 1px solid var(--border); padding: 0.75rem 1.5rem; border-radius: var(--radius); text-decoration: none; color: var(--text); font-weight: 500; }
+    .next-nav a:hover { border-color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav"><a href="../index.html">← Back to Learning Center</a></div>
+    <h1>Module 3: JavaScript</h1>
+    <p class="subtitle">Variables, functions, events, and state management</p>
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+
+    <div class="section">
+      <h2>What is JavaScript?</h2>
+      <p><strong>JavaScript</strong> is a programming language that runs in the browser. It adds interactivity, dynamic content, and logic to web pages.</p>
+      <div class="key-point">
+        <strong>Key Concept</strong>
+        JavaScript is the only programming language that runs natively in all browsers. It can manipulate the DOM, respond to user events, make network requests, and much more.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Variables</h2>
+      <p>Variables store data values. Modern JavaScript uses <code>let</code> and <code>const</code>.</p>
+      <h3>const</h3>
+      <pre><code>const TIMING = {<br>  reactionHold: 2200,<br>  surpriseLine: 1800,<br>};</code></pre>
+      <div class="file-ref"><strong>src/main.js (lines 14-19)</strong><code>const</code> is used for values that don't change. TIMING is a constant object.</div>
+      <h3>let</h3>
+      <pre><code>let state = {<br>  phase: "landing",<br>  questionIndex: 0,<br>};</code></pre>
+      <div class="file-ref"><strong>src/main.js (lines 21-27)</strong><code>let</code> is used for values that can change. <code>state</code> is reassigned during the experience.</div>
+    </div>
+
+    <div class="section">
+      <h2>Functions</h2>
+      <p>Functions are reusable blocks of code.</p>
+      <h3>Function Declaration</h3>
+      <pre><code>function render() {<br>  app.innerHTML = "";<br>  syncPhotoStage();<br>}</code></pre>
+      <div class="file-ref"><strong>src/main.js (lines 88-116)</strong>The <code>render()</code> function updates the UI based on the current state.</div>
+      <h3>Arrow Functions</h3>
+      <pre><code>const assetUrl = (path) => {<br>  if (!path) return "";<br>  const base = import.meta.env.BASE_URL || "./";<br>  return `${base}${path}`;<br>};</code></pre>
+      <div class="file-ref"><strong>src/main.js (lines 29-34)</strong>Arrow functions are a concise syntax for functions.</div>
+    </div>
+
+    <div class="section">
+      <h2>Objects</h3>
+      <p>Objects store key-value pairs.</p>
+      <pre><code>const state = {<br>  phase: "landing",<br>  questionIndex: 0,<br>  answersLocked: false,<br>};</code></pre>
+      <div class="file-ref"><strong>src/main.js (lines 21-27)</strong>The state object holds all the application state in one place.</div>
+    </div>
+
+    <div class="section">
+      <h2>Arrays</h3>
+      <p>Arrays store ordered lists of values.</p>
+      <pre><code>const letters = ["A", "B", "C", "D"];</code></pre>
+      <div class="file-ref"><strong>src/main.js (line 156)</strong>Used to label answer options.</div>
+      <pre><code>questions.map((opt, i) => `...`)</code></pre>
+      <div class="file-ref"><strong>src/main.js (lines 168-177)</strong>The <code>map()</code> method transforms arrays.</div>
+    </div>
+
+    <div class="section">
+      <h2>Event Listeners</h2>
+      <p>Event listeners respond to user actions.</p>
+      <pre><code>section.querySelector('[data-action="start"]').addEventListener("click", startGame);</code></pre>
+      <div class="file-ref"><strong>src/main.js (line 135)</strong>When the start button is clicked, <code>startGame()</code> is called.</div>
+      <pre><code>btn.addEventListener("keydown", (e) => {<br>  if (e.key === "Enter" || e.key === " ") {<br>    e.preventDefault();<br>    onSelectAnswer(Number(btn.dataset.index));<br>  }<br>});</code></pre>
+      <div class="file-ref"><strong>src/main.js (lines 184-189)</strong>Keyboard events for accessibility.</div>
+    </div>
+
+    <div class="section">
+      <h2>State Management</h2>
+      <p>This application uses a simple state-driven rendering pattern.</p>
+      <pre><code>const state = {<br>  phase: "landing",<br>  questionIndex: 0,<br>  answersLocked: false,<br>};</code></pre>
+      <div class="file-ref"><strong>src/main.js (lines 21-27)</strong>All state is in one object.</div>
+      <pre><code>function render() {<br>  switch (state.phase) {<br>    case "landing": renderLanding(); break;<br>    case "question": renderQuestion(); break;<br>    // ...<br>  }<br>}</code></pre>
+      <div class="file-ref"><strong>src/main.js (lines 88-116)</strong>The <code>render()</code> function checks the state and renders accordingly.</div>
+      <div class="key-point">
+        <strong>Why State-Driven Rendering?</strong>
+        State-driven rendering makes the application predictable and debuggable. The UI is always a function of the state. If you know the state, you know what the UI looks like.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>DOM Manipulation</h2>
+      <p>JavaScript can create, modify, and delete HTML elements.</p>
+      <pre><code>const section = document.createElement("section");<br>section.className = "screen screen--landing";<br>section.innerHTML = `...`;<br>app.appendChild(section);</code></pre>
+      <div class="file-ref"><strong>src/main.js (lines 120-137)</strong>Creating and adding elements to the DOM.</div>
+      <pre><code>app.innerHTML = "";</code></pre>
+      <div class="file-ref"><strong>src/main.js (line 90)</strong>Clearing the DOM before rendering new content.</div>
+    </div>
+
+    <div class="section">
+      <h2>ES Modules</h2>
+      <p>This application uses ES modules for code organization.</p>
+      <pre><code>import "./styles.css";<br>import gameConfig from "../config.js";<br>import { getPhotoSceneKey, mountPhotoStage, updatePhotoStage } from "./photoStage.js";</code></pre>
+      <div class="file-ref"><strong>src/main.js (lines 1-7)</strong>Importing CSS, configuration, and functions from other modules.</div>
+      <pre><code>export function getPhotoSceneKey(phase, questionIndex) { ... }</code></pre>
+      <div class="file-ref"><strong>src/photoStage.js (line 18)</strong>Exporting functions for use in other modules.</div>
+    </div>
+
+    <div class="section">
+      <h2>Conditionals</h2>
+      <p>Conditionals execute code based on conditions.</p>
+      <pre><code>if (state.answersLocked) return;</code></pre>
+      <div class="file-ref"><strong>src/main.js (line 196)</strong>Prevents multiple answers.</div>
+      <pre><code>const isLast = state.questionIndex >= gameConfig.questions.length - 1;<br>if (isLast) {<br>  state.phase = "surprise";<br>} else {<br>  state.questionIndex += 1;<br>  state.phase = "question";<br>}</code></pre>
+      <div class="file-ref"><strong>src/main.js (lines 231-239)</strong>Checking if it's the last question.</div>
+    </div>
+
+    <div class="section">
+      <h2>Loops</h2>
+      <p>Loops iterate over arrays or objects.</p>
+      <pre><code>section.querySelectorAll(".option-card").forEach((btn) => {<br>  btn.addEventListener("click", () => onSelectAnswer(Number(btn.dataset.index)));<br>});</code></pre>
+      <div class="file-ref"><strong>src/main.js (lines 182-190)</strong>The <code>forEach()</code> method iterates over the option cards.</div>
+    </div>
+
+    <div class="section">
+      <h2>Timers</h2>
+      <p>Timers execute code after a delay.</p>
+      <pre><code>window.setTimeout(() => {<br>  state.phase = "reaction";<br>  render();<br>}, prefersReducedMotion ? 350 : 650);</code></pre>
+      <div class="file-ref"><strong>src/main.js (lines 210-213)</strong>Advancing to the reaction phase after a delay.</div>
+    </div>
+
+    <div class="section">
+      <h2>Error Handling</h2>
+      <p>Try-catch blocks handle errors gracefully.</p>
+      <pre><code>try {<br>  if (!gameConfig?.questions?.length) {<br>    throw new Error("Game configuration is missing questions.");<br>  }<br>  applyDocumentMeta();<br>  render();<br>} catch (error) {<br>  console.error(error);<br>  showFatalError();<br>}</code></pre>
+      <div class="file-ref"><strong>src/main.js (lines 404-413)</strong>If the configuration is invalid, a fatal error is shown instead of a blank page.</div>
+    </div>
+
+    <div class="section">
+      <h2>MCQ: Test Your Knowledge</h2>
+      <h3>Question 1</h3>
+      <p>What is the difference between <code>let</code> and <code>const</code>?</p>
+      <ul><li>A) let is for numbers, const is for strings</li><li>B) let can be reassigned, const cannot</li><li>C) const is faster than let</li><li>D) There is no difference</li></ul>
+      <p><strong>Answer:</strong> B</p>
+      <p><strong>Explanation:</strong> <code>let</code> variables can be reassigned, while <code>const</code> variables cannot. However, const objects can have their properties modified.</p>
+
+      <h3>Question 2</h3>
+      <p>What does an event listener do?</p>
+      <ul><li>A) Creates HTML elements</li><li>B) Responds to user actions</li><li>C) Styles elements</li><li>D) Stores data</li></ul>
+      <p><strong>Answer:</strong> B</p>
+      <p><strong>Explanation:</strong> Event listeners "listen" for specific events (like clicks, keypresses) and execute a function when that event occurs.</p>
+
+      <h3>Question 3</h3>
+      <p>What is the purpose of <code>document.createElement()</code>?</p>
+      <ul><li>A) To select an element</li><li>B) To create a new HTML element</li><li>C) To delete an element</li><li>D) To style an element</li></ul>
+      <p><strong>Answer:</strong> B</p>
+      <p><strong>Explanation:</strong> <code>document.createElement()</code> creates a new HTML element that can then be added to the DOM.</p>
+    </div>
+
+    <div class="section">
+      <h2>Interview Question</h2>
+      <p><strong>Question:</strong> What is the difference between <code>==</code> and <code>===</code> in JavaScript?</p>
+      <p><strong>Answer:</strong> <code>==</code> is the loose equality operator that performs type coercion before comparing. <code>===</code> is the strict equality operator that does not perform type coercion. For example, <code>5 == "5"</code> is true (type coercion), but <code>5 === "5"</code> is false (different types). Best practice is to always use <code>===</code> to avoid unexpected behavior.</p>
+    </div>
+
+    <div class="section">
+      <h2>Summary</h2>
+      <p>In this module, you learned:</p>
+      <ul>
+        <li>Variables (let, const)</li>
+        <li>Functions (declarations, arrow functions)</li>
+        <li>Objects and arrays</li>
+        <li>Event listeners</li>
+        <li>State management</li>
+        <li>DOM manipulation</li>
+        <li>ES modules</li>
+        <li>Conditionals and loops</li>
+        <li>Timers</li>
+        <li>Error handling</li>
+        <li>How this application uses JavaScript for state-driven rendering</li>
+      </ul>
+    </div>
+
+    <div class="next-nav">
+      <a href="module-2-css.html">← Module 2</a>
+      <a href="module-4-browser-dom.html">Module 4: Browser + DOM →</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 0: How This Application Works - Learning Center</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #f8f6f4;
+      --bg-elevated: #ffffff;
+      --text: #1a1816;
+      --text-muted: #6b6560;
+      --accent: #c4a098;
+      --accent-soft: rgba(196, 160, 152, 0.1);
+      --border: rgba(26, 24, 22, 0.08);
+      --shadow: 0 4px 20px rgba(26, 24, 22, 0.08);
+      --radius: 12px;
+      --font-sans: system-ui, -apple-system, "SF Pro Text", "Segoe UI", Inter, sans-serif;
+      --font-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .nav {
+      margin-bottom: 2rem;
+    }
+
+    .nav a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .section {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    code {
+      font-family: var(--font-mono);
+      background: var(--accent-soft);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+
+    pre {
+      background: #1a1816;
+      color: #f8f6f4;
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+
+    pre code {
+      background: none;
+      padding: 0;
+      color: inherit;
+    }
+
+    .diagram {
+      background: var(--accent-soft);
+      border: 1px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      overflow-x: auto;
+    }
+
+    .key-point {
+      background: linear-gradient(135deg, var(--accent-soft), transparent);
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.5rem;
+      margin: 1rem 0;
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    .key-point strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--accent);
+    }
+
+    .try-it {
+      background: #e8f5e9;
+      border: 1px solid #4caf50;
+      border-left: 4px solid #4caf50;
+      padding: 1rem 1.5rem;
+      margin: 1rem 0;
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    .try-it strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #2e7d32;
+    }
+
+    .file-ref {
+      background: var(--accent-soft);
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius);
+      margin: 1rem 0;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+
+    .file-ref strong {
+      display: block;
+      margin-bottom: 0.25rem;
+      color: var(--accent);
+    }
+
+    .progress-bar {
+      background: var(--border);
+      height: 4px;
+      border-radius: 999px;
+      margin: 2rem 0;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      background: var(--accent);
+      height: 100%;
+      width: 9%;
+      border-radius: 999px;
+    }
+
+    .next-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      margin-top: 2rem;
+    }
+
+    .next-nav a {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius);
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      transition: border-color 0.2s ease;
+    }
+
+    .next-nav a:hover {
+      border-color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .section {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav">
+      <a href="../index.html">← Back to Learning Center</a>
+    </div>
+
+    <h1>Module 0: How This Application Works</h1>
+    <p class="subtitle">Understanding the complete lifecycle from browser to deployment</p>
+
+    <div class="progress-bar">
+      <div class="progress-fill"></div>
+    </div>
+
+    <div class="section">
+      <h2>What This Application Is</h2>
+      <p>This is a <strong>static web application</strong> — a birthday quiz that transforms into a love letter. It has:</p>
+      <ul>
+        <li>No backend server</li>
+        <li>No database</li>
+        <li>No authentication</li>
+        <li>No external APIs</li>
+      </ul>
+      <p>Everything runs in the user's browser using vanilla JavaScript.</p>
+
+      <div class="key-point">
+        <strong>Why This Matters</strong>
+        Understanding that this is a static site is crucial. It means the application is simple, fast, secure, and easy to deploy. All the "logic" happens on the client side (in the browser).
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>The Complete Lifecycle</h2>
+      <p>Here's what happens from the moment you open the URL to when the page is displayed:</p>
+
+      <div class="diagram">
+User opens URL
+    ↓
+DNS Resolution (domain → IP address)
+    ↓
+Browser sends HTTP request to GitHub Pages
+    ↓
+GitHub Pages returns index.html
+    ↓
+Browser parses HTML
+    ↓
+Browser loads CSS (styles.css)
+    ↓
+Browser loads JavaScript (main.js, config.js, photoStage.js)
+    ↓
+JavaScript executes
+    ↓
+Initial state rendered (landing page)
+    ↓
+User interacts with the application
+      </div>
+
+      <p>Let's break down each step:</p>
+
+      <h3>1. DNS Resolution</h3>
+      <p>When you type a URL like <code>username.github.io</code>, your computer needs to find the IP address of the server. DNS (Domain Name System) translates the human-readable domain into an IP address.</p>
+
+      <h3>2. HTTP Request</h3>
+      <p>Your browser sends an HTTP GET request to the server at that IP address. The request looks something like:</p>
+      <pre><code>GET /parul_birthday_2026/ HTTP/1.1
+Host: username.github.io</code></pre>
+
+      <h3>3. Server Response</h3>
+      <p>GitHub Pages receives the request and returns the <code>index.html</code> file. The response includes headers and the HTML content.</p>
+
+      <h3>4. HTML Parsing</h3>
+      <p>The browser reads the HTML and builds the DOM (Document Object Model). It also discovers linked resources:</p>
+      <div class="file-ref">
+        <strong>index.html (lines 28)</strong>
+        <code>&lt;script type="module" src="/src/main.js"&gt;&lt;/script&gt;</code>
+      </div>
+
+      <h3>5. Resource Loading</h3>
+      <p>The browser loads the linked resources:</p>
+      <ul>
+        <li>CSS from <code>src/styles.css</code> (imported by main.js)</li>
+        <li>JavaScript modules: <code>main.js</code>, <code>config.js</code>, <code>photoStage.js</code></li>
+        <li>Images (loaded dynamically by JavaScript)</li>
+      </ul>
+
+      <h3>6. JavaScript Execution</h3>
+      <p>The browser executes the JavaScript modules. This is where the application comes to life:</p>
+      <div class="file-ref">
+        <strong>src/main.js (lines 404-413)</strong>
+        <code>applyDocumentMeta();<br>render();</code>
+      </div>
+
+      <h3>7. Initial Render</h3>
+      <p>The <code>render()</code> function creates the initial HTML for the landing page and inserts it into the DOM.</p>
+    </div>
+
+    <div class="section">
+      <h2>How HTML, CSS, and JavaScript Interact</h2>
+      <p>This application uses a clean separation of concerns:</p>
+
+      <h3>HTML Provides Structure</h3>
+      <p>The HTML in <code>index.html</code> is minimal — just containers:</p>
+      <div class="file-ref">
+        <strong>index.html (lines 24-27)</strong>
+        <code>&lt;div id="photo-stage" class="photo-stage"&gt;&lt;/div&gt;<br>&lt;div id="app" class="app"&gt;<br>  &lt;p class="boot-fallback"&gt;One moment…&lt;/p&gt;<br>&lt;/div&gt;</code>
+      </div>
+
+      <h3>CSS Provides Styling</h3>
+      <p>CSS in <code>src/styles.css</code> defines how everything looks:</p>
+      <div class="file-ref">
+        <strong>src/styles.css (lines 2-22)</strong>
+        <code>:root {<br>  --bg: #f7f4f1;<br>  --text: #1a1816;<br>  --accent: #c4a098;<br>  /* ... */<br>}</code>
+      </div>
+
+      <h3>JavaScript Provides Logic</h3>
+      <p>JavaScript in <code>src/main.js</code> manages state and renders content:</p>
+      <div class="file-ref">
+        <strong>src/main.js (lines 21-27)</strong>
+        <code>const state = {<br>  phase: "landing",<br>  questionIndex: 0,<br>  answersLocked: false,<br>  // ...<br>};</code>
+      </div>
+
+      <div class="key-point">
+        <strong>The Flow</strong>
+        HTML defines containers → CSS styles them → JavaScript fills them with content and handles interactions
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>How State Is Maintained</h2>
+      <p>The application uses a simple state object:</p>
+
+      <div class="file-ref">
+        <strong>src/main.js (lines 21-27)</strong>
+        <code>const state = {<br>  phase: "landing",           // Current phase<br>  questionIndex: 0,           // Which question<br>  answersLocked: false,       // Can user answer?<br>  surpriseStep: 0,            // Surprise line number<br>  revealStep: 0,              // Reveal step number<br>};</code>
+      </div>
+
+      <p>When the user interacts, the state changes, and the <code>render()</code> function updates the DOM based on the new state.</p>
+
+      <div class="key-point">
+        <strong>Important: State Is Not Persisted</strong>
+        If the user refreshes the page, they start over. This is intentional for this particular application. No localStorage, no cookies, no server-side session.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>How User Interactions Trigger Code</h2>
+      <p>Here's the flow when a user clicks the "Let's see →" button:</p>
+
+      <div class="diagram">
+User clicks button
+    ↓
+Browser emits 'click' event
+    ↓
+Event listener detects the click
+    ↓
+startGame() function is called
+    ↓
+State is updated (phase: "question")
+    ↓
+render() function is called
+    ↓
+New HTML is generated for question phase
+    ↓
+DOM is updated
+    ↓
+Browser repaints
+    ↓
+User sees the question
+      </div>
+
+      <div class="file-ref">
+        <strong>src/main.js (lines 140-145)</strong>
+        <code>function startGame() {<br>  state.phase = "question";<br>  state.questionIndex = 0;<br>  state.answersLocked = false;<br>  render();<br>}</code>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>How the Build Process Works</h2>
+      <p>When you run <code>npm run build</code>, Vite transforms your source files:</p>
+
+      <div class="diagram">
+Source files (src/)
+    ↓
+Vite processes files
+    ↓
+Bundles JavaScript modules
+    ↓
+Minifies CSS and JavaScript
+    ↓
+Adds hashes to filenames (cache busting)
+    ↓
+Outputs to dist/
+    ↓
+dist/ is deployed to GitHub Pages
+      </div>
+
+      <p><strong>What Vite does:</strong></p>
+      <ul>
+        <li>Bundles ES modules into a single file</li>
+        <li>Optimizes assets</li>
+        <li>Generates source maps for debugging</li>
+        <li>Adds hashes to filenames (e.g., <code>index-abc123.js</code>) for browser caching</li>
+      </ul>
+
+      <div class="try-it">
+        <strong>Try It Yourself</strong>
+        Run <code>npm run build</code> and look at the <code>dist/</code> directory. Notice how the filenames have hashes. This is for cache busting — when you deploy a new version, browsers will download the new files instead of using cached versions.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>How GitHub Pages Deploys</h2>
+      <p>The deployment is automated via GitHub Actions:</p>
+
+      <div class="diagram">
+Developer pushes to GitHub
+    ↓
+GitHub Actions workflow triggers
+    ↓
+Workflow runs on GitHub runner (ubuntu-latest)
+    ↓
+Checkout code
+    ↓
+Setup Node.js (v20)
+    ↓
+npm ci (install dependencies)
+    ↓
+npm run build (with BASE_PATH)
+    ↓
+dist/ is uploaded as artifact
+    ↓
+GitHub Pages deploys the artifact
+    ↓
+Available at username.github.io/repo-name/
+      </div>
+
+      <div class="file-ref">
+        <strong>.github/workflows/pages.yml (lines 1-61)</strong>
+        The workflow file defines this entire process. It runs automatically whenever you push to the main branch.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Key Architectural Decisions</h2>
+
+      <h3>Why Vanilla JavaScript?</h3>
+      <p>No framework overhead, smaller bundle size, easier to understand for beginners, minimal tooling required.</p>
+
+      <h3>Why Vite?</h3>
+      <p>Fast HMR (Hot Module Replacement) for instant updates during development, modern ES module support, automatic optimization.</p>
+
+      <h3>Why GitHub Pages?</h3>
+      <p>Free hosting, automatic deployment via Git, CDN-backed, HTTPS by default.</p>
+
+      <h3>Why State-Driven Rendering?</h3>
+      <p>Predictable (state is the single source of truth), debuggable (easy to see what phase the app is in), testable (can test state transitions).</p>
+    </div>
+
+    <div class="section">
+      <h2>What You'll Learn in This Curriculum</h2>
+      <p>This curriculum will teach you:</p>
+      <ul>
+        <li><strong>HTML</strong> — Structure and semantics (Module 1)</li>
+        <li><strong>CSS</strong> — Styling and layout (Module 2)</li>
+        <li><strong>JavaScript</strong> — Logic and interactivity (Module 3)</li>
+        <li><strong>DOM</strong> — How the browser renders (Module 4)</li>
+        <li><strong>Web Architecture</strong> — How the web works (Module 5)</li>
+        <li><strong>Build Tools</strong> — npm and Vite (Module 6)</li>
+        <li><strong>Git</strong> — Version control (Module 7)</li>
+        <li><strong>GitHub</strong> — Collaboration and hosting (Module 8)</li>
+        <li><strong>GitHub Actions</strong> — CI/CD (Module 9)</li>
+        <li><strong>Docker</strong> — Containerization (Module 10)</li>
+        <li><strong>Debugging</strong> — Finding and fixing bugs (Module 11)</li>
+      </ul>
+
+      <p>Every module will connect theory to <strong>this specific application</strong>. You won't just learn generic concepts — you'll learn how they're used right here.</p>
+    </div>
+
+    <div class="section">
+      <h2>Ready to Dive In?</h2>
+      <p>You now understand the big picture. Let's start with the fundamentals:</p>
+
+      <div class="try-it">
+        <strong>Next Step</strong>
+        Proceed to <a href="module-1-html.html">Module 1: HTML</a> to learn about the structure of web pages and how this application uses HTML.
+      </div>
+    </div>
+
+    <div class="next-nav">
+      <a href="../index.html">← Back to Learning Center</a>
+      <a href="module-1-html.html">Module 1: HTML →</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -384,6 +384,14 @@ function showFatalError() {
   `;
 }
 
+const parul = import.meta.env.VITE_WIFE_NAME;
+const deepansh = import.meta.env.VITE_HUSBAND_NAME;
+
+const footer = document.createElement("footer");
+footer.innerHTML = `<p>Made with ❤️ for ${parul} (wife of ${deepansh})</p>`;
+document.body.appendChild(footer);
+
+
 try {
   if (!gameConfig?.questions?.length) {
     throw new Error("Game configuration is missing questions.");

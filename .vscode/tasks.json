@@ -1,0 +1,99 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "dev",
+      "type": "npm",
+      "script": "dev",
+      "problemMatcher": [],
+      "isBackground": true,
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "build",
+      "type": "npm",
+      "script": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "preview",
+      "type": "npm",
+      "script": "preview",
+      "problemMatcher": []
+    },
+    {
+      "label": "Docker: Build",
+      "type": "shell",
+      "command": "docker",
+      "args": [
+        "build",
+        "-f",
+        "Dockerfile.local",
+        "-t",
+        "parul-birthday-local",
+        "."
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Docker: Run",
+      "type": "shell",
+      "command": "docker",
+      "args": [
+        "run",
+        "-p",
+        "5173:5173",
+        "parul-birthday-local"
+      ],
+      "problemMatcher": [],
+      "dependsOn": ["Docker: Build"]
+    },
+    {
+      "label": "Docker: Compose Up",
+      "type": "shell",
+      "command": "docker-compose",
+      "args": [
+        "-f",
+        "docker-compose.local.yml",
+        "up"
+      ],
+      "problemMatcher": [],
+      "isBackground": true
+    },
+    {
+      "label": "Docker: Compose Down",
+      "type": "shell",
+      "command": "docker-compose",
+      "args": [
+        "-f",
+        "docker-compose.local.yml",
+        "down"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Python: Install debugpy",
+      "type": "shell",
+      "command": "pip",
+      "args": [
+        "install",
+        "-r",
+        "debug/requirements.txt"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Python: Run debug harness",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        "debug/app.py"
+      ],
+      "problemMatcher": [],
+      "dependsOn": ["Python: Install debugpy"]
+    }
+  ]
+}

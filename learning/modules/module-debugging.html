@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 11: Debugging - Learning Center</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #f8f6f4; --bg-elevated: #ffffff; --text: #1a1816; --text-muted: #6b6560;
+      --accent: #c4a098; --accent-soft: rgba(196, 160, 152, 0.1); --border: rgba(26, 24, 22, 0.08);
+      --shadow: 0 4px 20px rgba(26, 24, 22, 0.08); --radius: 12px;
+      --font-sans: system-ui, -apple-system, "SF Pro Text", "Segoe UI", Inter, sans-serif;
+      --font-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+    }
+    body { font-family: var(--font-sans); background: var(--bg); color: var(--text); line-height: 1.7; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    .nav { margin-bottom: 2rem; }
+    .nav a { color: var(--accent); text-decoration: none; font-weight: 500; }
+    h1 { font-size: 2.5rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+    .subtitle { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem; }
+    .section { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-bottom: 2rem; }
+    h2 { font-size: 1.75rem; font-weight: 600; margin-bottom: 1rem; }
+    h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.75rem; margin-top: 1.5rem; }
+    p { margin-bottom: 1rem; }
+    code { font-family: var(--font-mono); background: var(--accent-soft); padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+    .key-point { background: linear-gradient(135deg, var(--accent-soft), transparent); border-left: 4px solid var(--accent); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .key-point strong { display: block; margin-bottom: 0.5rem; color: var(--accent); }
+    .diagram { background: var(--accent-soft); border: 1px solid var(--accent); border-radius: var(--radius); padding: 1.5rem; margin: 1.5rem 0; font-family: var(--font-mono); font-size: 0.9rem; }
+    .progress-bar { background: var(--border); height: 4px; border-radius: 999px; margin: 2rem 0; overflow: hidden; }
+    .progress-fill { background: var(--accent); height: 100%; width: 100%; border-radius: 999px; }
+    .next-nav { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; border-top: 1px solid var(--border); margin-top: 2rem; }
+    .next-nav a { background: var(--bg-elevated); border: 1px solid var(--border); padding: 0.75rem 1.5rem; border-radius: var(--radius); text-decoration: none; color: var(--text); font-weight: 500; }
+    .next-nav a:hover { border-color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav"><a href="../index.html">← Back to Learning Center</a></div>
+    <h1>Module 11: Debugging</h1>
+    <p class="subtitle">Systematic debugging with browser DevTools and debugpy</p>
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+
+    <div class="section">
+      <h2>The Debugging Process</h2>
+      <div class="diagram">
+Something is broken
+  ↓
+Observe symptom
+  ↓
+Reproduce reliably
+  ↓
+Inspect browser console
+  ↓
+Inspect DOM
+  ↓
+Inspect CSS
+  ↓
+Inspect network
+  ↓
+Set breakpoint
+  ↓
+Inspect variables
+  ↓
+Trace execution
+  ↓
+Fix
+  ↓
+Retest
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Browser DevTools</h2>
+      <p>Every modern browser has DevTools for debugging. Press F12 or right-click and select "Inspect".</p>
+      <h3>Console</h3>
+      <p>Shows errors, warnings, and logs. JavaScript errors appear here in red.</p>
+      <h3>Elements</h3>
+      <p>Shows the DOM tree. You can inspect elements, modify styles, and see computed values.</p>
+      <h3>Sources</h3>
+      <p>Shows source files. Set breakpoints, step through code, inspect variables.</p>
+      <h3>Network</h3>
+      <p>Shows network requests. Check for 404 errors, slow requests, failed assets.</p>
+      <h3>Application</h3>
+      <p>Shows storage (localStorage, cookies), service workers, and more.</p>
+    </div>
+
+    <div class="section">
+      <h2>Breakpoints</h3>
+      <p>A <strong>breakpoint</strong> pauses execution at a specific line of code.</p>
+      <h3>Setting Breakpoints</h3>
+      <ol>
+        <li>Open Sources panel in DevTools</li>
+        <li>Click the line number in the source file</li>
+        <li>A blue marker appears</li>
+        <li>When execution reaches that line, it pauses</li>
+      </ol>
+      <h3>Stepping</h3>
+      <ul>
+        <li><strong>Step over</strong>: Execute current line, move to next</li>
+        <li><strong>Step into</strong>: If current line calls a function, go into it</li>
+        <li><strong>Step out</strong>: Finish current function, return to caller</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Common Bugs in This Application</h2>
+      <h3>Photos Not Appearing</h3>
+      <p><strong>Symptom:</strong> Photos don't show on the page.</p>
+      <p><strong>Diagnosis:</strong> Check Network tab for 404 errors. Check console for errors.</p>
+      <p><strong>Fix:</strong> Verify image paths in config.js. Ensure images exist in public/assets/photos/.</p>
+      <h3>State Not Updating</h3>
+      <p><strong>Symptom:</strong> Clicking buttons doesn't change the screen.</p>
+      <p><strong>Diagnosis:</strong> Set breakpoint in event handler. Check if function is called.</p>
+      <p><strong>Fix:</strong> Check if answersLocked is true. Check if event listener is attached.</p>
+           <h3>Build Fails</h3>
+      <p><strong>Symptom:</strong> <code>npm run build</code> fails with errors.</p>
+      <p><strong>Diagnosis:</strong> Read the error message. Check for syntax errors.</p>
+      <p><strong>Fix:</strong> Fix syntax errors. Check import paths. Ensure all files exist.</p>
+    </div>
+
+    <div class="section">
+      <h2>VS Code Debugger</h2>
+      <p>You can debug directly from VS Code using launch.json.</p>
+      <div class="key-point">
+        <strong>launch.json</strong>
+        This project includes .vscode/launch.json with debugging configurations for local development and Docker.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>debugpy (Python Debugger)</h2>
+      <p><strong>debugpy</strong> is a Python debugger. This project includes it for learning purposes, even though the main app is JavaScript.</p>
+      <div class="key-point">
+        <strong>debugpy is Educational Only</strong>
+        The production application is JavaScript-based. debugpy is included in the debug/ directory as a learning sandbox to teach debugging concepts. It is NOT part of production.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>MCQ: Test Your Knowledge</h2>
+      <h3>Question 1</h3>
+      <p>What does a breakpoint do?</p>
+      <ul><li>A) Breaks the code permanently</li><li>B> Pauses execution at a specific line</li><li>C) Deletes code</li><li>D) Optimizes code</li></ul>
+      <p><strong>Answer:</strong> B</p>
+      <p><strong>Explanation:</strong> A breakpoint pauses execution at a specific line of code, allowing you to inspect variables and step through the code.</p>
+
+      <h3>Question 2</h3>
+      <p>What is the difference between "step over" and "step into"?</p>
+      <ul><li>A) Step over skips lines, step into doesn't</li><li>B) Step over executes current line, step into goes into called functions</li><li>C) They are the same</li><li>D) Step into skips lines, step over doesn't</li></ul>
+      <p><strong>Answer:</strong> B</p>
+      <p><strong>Explanation:</strong> "Step over" executes the current line and moves to the next line in the current function. "Step into" goes into any function called on the current line.</p>
+
+      <h3>Question 3</h3>
+      <p>Where do JavaScript errors appear in DevTools?</p>
+      <ul><li>A) Elements tab</li><li>B) Network tab</li><li>C) Console tab</li><li>D) Sources tab</li></ul>
+      <p><strong>Answer:</strong> C</p>
+      <p><strong>Explanation:</strong> JavaScript errors appear in the Console tab of DevTools, typically in red text with an error message and stack trace.</p>
+    </div>
+
+    <div class="section">
+      <h2>Interview Question</h2>
+      <p><strong>Question:</strong> How do you debug a memory leak in a JavaScript application?</p>
+      <p><strong>Answer:</strong> Use the Memory panel in Chrome DevTools to take heap snapshots. Compare snapshots to see which objects are being retained unexpectedly. Look for detached DOM nodes that are still referenced by JavaScript. Use the Allocation sampling profiler to track memory allocations over time. Identify event listeners or closures that are holding references to objects that should be garbage collected. Remove unnecessary references and ensure proper cleanup in componentWillUnmount or similar lifecycle hooks.</p>
+    </div>
+
+    <div class="section">
+      <h2>Summary</h2>
+      <p>In this module, you learned:</p>
+      <ul>
+        <li>The systematic debugging process</li>
+        <li>Browser DevTools (Console, Elements, Sources, Network, Application)</li>
+        <li>Breakpoints and stepping</li>
+        <li>Common bugs and how to fix them</li>
+        <li>VS Code debugging with launch.json</li>
+        <li>debugpy for learning debugging concepts</li>
+        <li>That debugpy is educational only, not part of production</li>
+      </ul>
+    </div>
+
+    <div class="next-nav">
+      <a href="module-10-docker.html">← Module 10</a>
+      <a href="../index.html">Back to Learning Center →</a>
+    </div>
+  </div>
+</body>
+</html>

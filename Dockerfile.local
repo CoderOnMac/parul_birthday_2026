@@ -1,0 +1,23 @@
+# Local-only Dockerfile for development and learning
+# This is NOT used in production deployment
+# Production uses GitHub Pages directly
+
+FROM node:20-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files first for better caching
+COPY package*.json ./
+
+# Install dependencies
+RUN npm ci
+
+# Copy source files
+COPY . .
+
+# Expose development server port
+EXPOSE 5173
+
+# Run development server
+CMD ["npm", "run", "dev", "--", "--host"]

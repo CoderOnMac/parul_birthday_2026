@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learning Center - Complete coding university for the Parul Birthday application" />
+  <title>Learning Center - Parul Birthday App</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #f8f6f4;
+      --bg-elevated: #ffffff;
+      --text: #1a1816;
+      --text-muted: #6b6560;
+      --accent: #c4a098;
+      --accent-soft: rgba(196, 160, 152, 0.1);
+      --border: rgba(26, 24, 22, 0.08);
+      --shadow: 0 4px 20px rgba(26, 24, 22, 0.08);
+      --radius: 12px;
+      --font-sans: system-ui, -apple-system, "SF Pro Text", "Segoe UI", Inter, sans-serif;
+      --font-serif: Georgia, "Times New Roman", serif;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    header {
+      text-align: center;
+      padding: 3rem 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    .learning-path {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .module-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .module-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+      border-color: var(--accent);
+    }
+
+    .module-number {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    .module-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .module-description {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .module-status {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 4px;
+      height: 1.5rem;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .quick-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .quick-link {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s ease;
+    }
+
+    .quick-link:hover {
+      border-color: var(--accent);
+    }
+
+    .quick-link-title {
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+
+    .quick-link-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .start-here {
+      background: linear-gradient(135deg, var(--accent-soft), transparent);
+      border: 2px solid var(--accent);
+      padding: 2rem;
+      border-radius: var(--radius);
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .start-here h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .start-here p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .start-btn {
+      display: inline-block;
+      background: var(--text);
+      color: var(--bg);
+      padding: 0.75rem 2rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: transform 0.2s ease;
+    }
+
+    .start-btn:hover {
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .learning-path {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Learning Center</h1>
+      <p class="subtitle">Complete coding university for the Parul Birthday application</p>
+    </header>
+
+    <div class="start-here">
+      <h2>🎓 Start Here</h2>
+      <p>New to this codebase? Begin with Module 0 to understand how this application works.</p>
+      <a href="modules/module-0-how-this-application-works.html" class="start-btn">Begin Learning →</a>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Learning Path</h2>
+      <div class="learning-path">
+        <a href="modules/module-0-how-this-application-works.html" class="module-card">
+          <div class="module-number">Module 0</div>
+          <div class="module-title">How This Application Works</div>
+          <div class="module-description">Understand the architecture, from browser to deployment</div>
+          <span class="module-status">Start Here</span>
+        </a>
+
+        <a href="modules/module-1-html.html" class="module-card">
+          <div class="module-number">Module 1</div>
+          <div class="module-title">HTML</div>
+          <div class="module-description">Structure, semantics, and how this app uses HTML</div>
+          <span class="module-status">Beginner</span>
+        </a>
+
+        <a href="modules/module-2-css.html" class="module-card">
+          <div class="module-number">Module 2</div>
+          <div class="module-title">CSS</div>
+          <div class="module-description">Styling, layout, animations, and design tokens</div>
+          <span class="module-status">Beginner</span>
+        </a>
+
+        <a href="modules/module-3-javascript.html" class="module-card">
+          <div class="module-number">Module 3</div>
+          <div class="module-title">JavaScript</div>
+          <div class="module-description">Variables, functions, events, and state management</div>
+          <span class="module-status">Beginner</span>
+        </a>
+
+        <a href="modules/module-4-browser-dom.html" class="module-card">
+          <div class="module-number">Module 4</div>
+          <div class="module-title">Browser + DOM</div>
+          <div class="module-description">How the browser renders and manipulates the DOM</div>
+          <span class="module-status">Intermediate</span>
+        </a>
+
+        <a href="modules/module-5-web-architecture.html" class="module-card">
+          <div class="module-number">Module 5</div>
+          <div class="module-title">Web Architecture</div>
+          <div class="module-description">Frontend, backend, static sites, and HTTP</div>
+          <span class="module-status">Beginner</span>
+        </a>
+
+        <a href="modules/module-6-package-managers.html" class="module-card">
+          <div class="module-number">Module 6</div>
+          <div class="module-title">Package Managers & Build Tools</div>
+          <div class="module-description">npm, Vite, and the build process</div>
+          <span class="module-status">Intermediate</span>
+        </a>
+
+        <a href="modules/module-7-git.html" class="module-card">
+          <div class="module-number">Module 7</div>
+          <div class="module-title">Git</div>
+          <div class="module-description">Version control, commits, branches, and collaboration</div>
+          <span class="module-status">Beginner</span>
+        </a>
+
+        <a href="modules/module-8-github.html" class="module-card">
+          <div class="module-number">Module 8</div>
+          <div class="module-title">GitHub</div>
+          <div class="module-description">Repositories, Actions, Pages, and collaboration</div>
+          <span class="module-status">Beginner</span>
+        </a>
+
+        <a href="modules/module-9-github-actions.html" class="module-card">
+          <div class="module-number">Module 9</div>
+          <div class="module-title">GitHub Actions</div>
+          <div class="module-description">CI/CD, workflows, and automated deployment</div>
+          <span class="module-status">Intermediate</span>
+        </a>
+
+        <a href="modules/module-10-docker.html" class="module-card">
+          <div class="module-number">Module 10</div>
+          <div class="module-title">Docker</div>
+          <div class="module-description">Containers, images, and local development environments</div>
+          <span class="module-status">Intermediate</span>
+        </a>
+
+        <a href="modules/module-debugging.html" class="module-card">
+          <div class="module-number">Module 11</div>
+          <div class="module-title">Debugging</div>
+          <div class="module-description">Systematic debugging with browser DevTools and debugpy</div>
+          <span class="module-status">Intermediate</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Quick Reference</h2>
+      <div class="quick-links">
+        <a href="../docs/configuration-map.md" class="quick-link">
+          <div class="quick-link-title">Configuration Map</div>
+          <div class="quick-link-desc">Every configurable value in one place</div>
+        </a>
+
+        <a href="../docs/change-cookbook.md" class="quick-link">
+          <div class="quick-link-title">Change Cookbook</div>
+          <div class="quick-link-desc">"I want to change X → where do I go?"</div>
+        </a>
+
+        <a href="../docs/cheatsheets/" class="quick-link">
+          <div class="quick-link-title">Cheat Sheets</div>
+          <div class="quick-link-desc">Quick reference for all technologies</div>
+        </a>
+
+        <a href="../docs/glossary.md" class="quick-link">
+          <div class="quick-link-title">Glossary</div>
+          <div class="quick-link-desc">Definitions of technical terms</div>
+        </a>
+
+        <a href="../docs/interview-prep.md" class="quick-link">
+          <div class="quick-link-title">Interview Prep</div>
+          <div class="quick-link-desc">Questions for technical interviews</div>
+        </a>
+
+        <a href="../commands.md" class="quick-link">
+          <div class="quick-link-title">Command Handbook</div>
+          <div class="quick-link-desc">All development commands explained</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Practice & Assessment</h2>
+      <div class="quick-links">
+        <a href="labs/" class="quick-link">
+          <div class="quick-link-title">Code Labs</div>
+          <div class="quick-link-desc">Hands-on coding exercises</div>
+        </a>
+
+        <a href="quizzes/" class="quick-link">
+          <div class="quick-link-title">Quizzes</div>
+          <div class="quick-link-desc">MCQs and knowledge checks</div>
+        </a>
+
+        <a href="final-exam.html" class="quick-link">
+          <div class="quick-link-title">Final Exam</div>
+          <div class="quick-link-desc">Comprehensive assessment</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Code Deep Dive</h2>
+      <div class="quick-links">
+        <a href="code-reading/" class="quick-link">
+          <div class="quick-link-title">Code Reading Mode</div>
+          <div class="quick-link-desc">Line-by-line explanations of source files</div>
+        </a>
+
+        <a href="../docs/ARCHITECTURE.md" class="quick-link">
+          <div class="quick-link-title">Architecture Guide</div>
+          <div class="quick-link-desc">Complete application architecture</div>
+        </a>
+      </div>
+    </div>
+
+    <footer>
+      <p>Learning Center for Parul Birthday 2026 Application</p>
+      <p style="margin-top: 0.5rem; font-size: 0.85rem;">
+        <a href="../index.html" style="color: var(--accent); text-decoration: none;">← Back to Application</a>
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 5: Web Architecture - Learning Center</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #f8f6f4; --bg-elevated: #ffffff; --text: #1a1816; --text-muted: #6b6560;
+      --accent: #c4a098; --accent-soft: rgba(196, 160, 152, 0.1); --border: rgba(26, 24, 22, 0.08);
+      --shadow: 0 4px 20px rgba(26, 24, 22, 0.08); --radius: 12px;
+      --font-sans: system-ui, -apple-system, "SF Pro Text", "Segoe UI", Inter, sans-serif;
+      --font-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+    }
+    body { font-family: var(--font-sans); background: var(--bg); color: var(--text); line-height: 1.7; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    .nav { margin-bottom: 2rem; }
+    .nav a { color: var(--accent); text-decoration: none; font-weight: 500; }
+    h1 { font-size: 2.5rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+    .subtitle { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem; }
+    .section { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-bottom: 2rem; }
+    h2 { font-size: 1.75rem; font-weight: 600; margin-bottom: 1rem; }
+    h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.75rem; margin-top: 1.5rem; }
+    p { margin-bottom: 1rem; }
+    code { font-family: var(--font-mono); background: var(--accent-soft); padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+    .key-point { background: linear-gradient(135deg, var(--accent-soft), transparent); border-left: 4px solid var(--accent); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .key-point strong { display: block; margin-bottom: 0.5rem; color: var(--accent); }
+    .diagram { background: var(--accent-soft); border: 1px solid var(--accent); border-radius: var(--radius); padding: 1.5rem; margin: 1.5rem 0; font-family: var(--font-mono); font-size: 0.9rem; }
+    .progress-bar { background: var(--border); height: 4px; border-radius: 999px; margin: 2rem 0; overflow: hidden; }
+    .progress-fill { background: var(--accent); height: 100%; width: 54%; border-radius: 999px; }
+    .next-nav { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; border-top: 1px solid var(--border); margin-top: 2rem; }
+    .next-nav a { background: var(--bg-elevated); border: 1px solid var(--border); padding: 0.75rem 1.5rem; border-radius: var(--radius); text-decoration: none; color: var(--text); font-weight: 500; }
+    .next-nav a:hover { border-color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav"><a href="../index.html">← Back to Learning Center</a></div>
+    <h1>Module 5: Web Architecture</h1>
+    <p class="subtitle">Frontend, backend, static sites, and HTTP</p>
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+
+    <div class="section">
+      <h2>Frontend vs Backend</h2>
+      <p><strong>Frontend</strong> is what runs in the browser — HTML, CSS, JavaScript. <strong>Backend</strong> is what runs on the server — databases, APIs, authentication.</p>
+      <div class="key-point">
+        <strong>This Application is Frontend-Only</strong>
+        This application has no backend. All logic runs in the browser. There's no server processing, no database, no API calls. It's a pure static site.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Static vs Dynamic Sites</h2>
+      <p><strong>Static sites</strong> serve pre-built files. <strong>Dynamic sites</strong> generate files on the fly.</p>
+      <div class="diagram">
+Static Site (This Application)
+  ↓
+Pre-built HTML/CSS/JS files
+  ↓
+Served as-is
+  ↓
+Fast, simple, secure
+
+Dynamic Site
+  ↓
+Server processes request
+  ↓
+Generates HTML
+  ↓
+Serves generated HTML
+  ↓
+Flexible, complex
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>HTTP and HTTPS</h2>
+      <p><strong>HTTP</strong> (Hypertext Transfer Protocol) is the protocol for transferring data on the web. <strong>HTTPS</strong> is the secure version with encryption.</p>
+      <div class="key-point">
+        <strong>GitHub Pages Uses HTTPS</strong>
+        This application is served over HTTPS by default on GitHub Pages. This ensures secure communication between the browser and the server.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Client vs Server</h2>
+      <p><strong>Client</strong> is the browser (Chrome, Firefox, Safari). <strong>Server</strong> is the computer that hosts the website.</p>
+      <div class="diagram">
+Client (Browser)
+  ↓
+Sends HTTP request
+  ↓
+Server (GitHub Pages)
+  ↓
+Sends HTTP response
+  ↓
+Client renders response
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Why This Application Doesn't Need a Backend</h2>
+      <ul>
+        <li>No user authentication needed</li>
+        <li>No data persistence needed (state is in-memory only)</li>
+        <li>No dynamic content generation needed</li>
+        <li>No API calls needed</li>
+        <li>All logic can run in the browser</li>
+      </ul>
+      <div class="key-point">
+        <strong>Benefits of No Backend</strong>
+        Simpler, faster, more secure, cheaper to host, easier to deploy. Static sites are ideal for content that doesn't change frequently.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>CDN (Content Delivery Network)</h2>
+      <p>A CDN is a network of servers that deliver content to users based on their geographic location.</p>
+      <div class="key-point">
+        <strong>GitHub Pages Uses a CDN</strong>
+        GitHub Pages is backed by a CDN, which means your application is served from servers close to users around the world, making it fast.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>MCQ: Test Your Knowledge</h2>
+      <h3>Question 1</h3>
+      <p>What is the main difference between a static site and a dynamic site?</p>
+      <ul><li>A) Static sites use HTML, dynamic sites don't</li><li>B) Static sites serve pre-built files, dynamic sites generate files on the fly</li><li>C) Static sites are slower</li><li>D) Dynamic sites are simpler</li></ul>
+      <p><strong>Answer:</strong> B</p>
+      <p><strong>Explanation:</strong> Static sites serve pre-built files that don't change. Dynamic sites generate files on the fly based on requests, often using a backend.</p>
+
+      <h3>Question 2</h3>
+      <p>What does HTTPS provide that HTTP doesn't?</p>
+      <ul><li>A) Faster loading</li><li>B) Better design</li><li>C) Encryption and security</li><li>D) More features</li></ul>
+      <p><strong>Answer:</strong> C</p>
+      <p><strong>Explanation:</strong> HTTPS encrypts the communication between the browser and server, making it secure. HTTP sends data in plain text.</p>
+
+      <h3>Question 3</h3>
+      <p>Why doesn't this application need a backend?</p>
+      <ul><li>A) It's too simple</li><li>B) All logic can run in the browser</li><li>C) Backend is expensive</li><li>D) It uses a CDN instead</li></ul>
+      <p><strong>Answer:</strong> B</p>
+      <p><strong>Explanation:</strong> This application doesn't need authentication, data persistence, or dynamic content generation. All logic can run in the browser, making a backend unnecessary.</p>
+    </div>
+
+    <div class="section">
+      <h2>Interview Question</h2>
+      <p><strong>Question:</strong> When would you choose a static site over a dynamic site?</p>
+      <p><strong>Answer:</strong> Choose a static site when: (1) Content doesn't change frequently, (2) No user authentication or personalization is needed, (3) No server-side processing is required, (4) You want maximum performance and security, (5) You want simple deployment and low hosting costs. Dynamic sites are better when you need user accounts, real-time data, database operations, or server-side processing.</p>
+    </div>
+
+    <div class="section">
+      <h2>Summary</h2>
+      <p>In this module, you learned:</p>
+      <ul>
+        <li>Frontend vs backend</li>
+        <li>Static vs dynamic sites</li>
+        <li>HTTP and HTTPS</li>
+        <li>Client vs server</li>
+        <li>Why this application doesn't need a backend</li>
+        <li>CDNs and how they improve performance</li>
+      </ul>
+    </div>
+
+    <div class="next-nav">
+      <a href="module-4-browser-dom.html">← Module 4</a>
+      <a href="module-6-package-managers.html">Module 6: Package Managers →</a>
+    </div>
+  </div>
+</body>
+</html>

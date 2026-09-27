@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 1: HTML - Learning Center</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #f8f6f4;
+      --bg-elevated: #ffffff;
+      --text: #1a1816;
+      --text-muted: #6b6560;
+      --accent: #c4a098;
+      --accent-soft: rgba(196, 160, 152, 0.1);
+      --border: rgba(26, 24, 22, 0.08);
+      --shadow: 0 4px 20px rgba(26, 24, 22, 0.08);
+      --radius: 12px;
+      --font-sans: system-ui, -apple-system, "SF Pro Text", "Segoe UI", Inter, sans-serif;
+      --font-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .nav {
+      margin-bottom: 2rem;
+    }
+
+    .nav a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .section {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    code {
+      font-family: var(--font-mono);
+      background: var(--accent-soft);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+
+    pre {
+      background: #1a1816;
+      color: #f8f6f4;
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+
+    pre code {
+      background: none;
+      padding: 0;
+      color: inherit;
+    }
+
+    .key-point {
+      background: linear-gradient(135deg, var(--accent-soft), transparent);
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.5rem;
+      margin: 1rem 0;
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    .key-point strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--accent);
+    }
+
+    .try-it {
+      background: #e8f5e9;
+      border: 1px solid #4caf50;
+      border-left: 4px solid #4caf50;
+      padding: 1rem 1.5rem;
+      margin: 1rem 0;
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    .try-it strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #2e7d32;
+    }
+
+    .file-ref {
+      background: var(--accent-soft);
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius);
+      margin: 1rem 0;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+
+    .file-ref strong {
+      display: block;
+      margin-bottom: 0.25rem;
+      color: var(--accent);
+    }
+
+    .example {
+      background: #f5f5f5;
+      border: 1px solid #ddd;
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    .example-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text-muted);
+    }
+
+    .progress-bar {
+      background: var(--border);
+      height: 4px;
+      border-radius: 999px;
+      margin: 2rem 0;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      background: var(--accent);
+      height: 100%;
+      width: 18%;
+      border-radius: 999px;
+    }
+
+    .next-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      margin-top: 2rem;
+    }
+
+    .next-nav a {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius);
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      transition: border-color 0.2s ease;
+    }
+
+    .next-nav a:hover {
+      border-color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .section {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav">
+      <a href="../index.html">← Back to Learning Center</a>
+    </div>
+
+    <h1>Module 1: HTML</h1>
+    <p class="subtitle">Structure, semantics, and how this application uses HTML</p>
+
+    <div class="progress-bar">
+      <div class="progress-fill"></div>
+    </div>
+
+    <div class="section">
+      <h2>What is HTML?</h2>
+      <p><strong>HTML</strong> (HyperText Markup Language) is the standard markup language for creating web pages. It describes the structure of a web page using a series of elements.</p>
+
+      <div class="key-point">
+        <strong>Key Concept</strong>
+        HTML is not a programming language — it's a markup language. It doesn't have logic or variables. It simply describes what content is and how it's structured.
+      </div>
+
+      <h3>HTML in This Application</h3>
+      <p>This application uses minimal HTML. The <code>index.html</code> file is very simple — it just provides containers for JavaScript to fill with content.</p>
+
+      <div class="file-ref">
+        <strong>index.html (lines 1-30)</strong>
+        <code>&lt;!DOCTYPE html&gt;<br>&lt;html lang="en"&gt;<br>  &lt;head&gt;<br>    &lt;meta charset="UTF-8" /&gt;<br>    &lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;<br>    &lt;!-- ... meta tags ... --&gt;<br>    &lt;title&gt;Something for you&lt;/title&gt;<br>  &lt;/head&gt;<br>  &lt;body&gt;<br>    &lt;div id="photo-stage"&gt;&lt;/div&gt;<br>    &lt;div id="app"&gt;&lt;/div&gt;<br>    &lt;script type="module" src="/src/main.js"&gt;&lt;/script&gt;<br>  &lt;/body&gt;<br>&lt;/html&gt;</code>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>HTML Document Structure</h2>
+      <p>Every HTML document has a specific structure:</p>
+
+      <h3>DOCTYPE Declaration</h3>
+      <pre><code>&lt;!DOCTYPE html&gt;</code></pre>
+      <p>This tells the browser that this is an HTML5 document. It must be the very first line.</p>
+
+      <h3>html Element</h3>
+      <pre><code>&lt;html lang="en"&gt;...&lt;/html&gt;</code></pre>
+      <p>The root element that contains all other HTML. The <code>lang</code> attribute specifies the language.</p>
+
+      <h3>head Element</h3>
+      <pre><code>&lt;head&gt;...&lt;/head&gt;</code></pre>
+      <p>Contains meta-information about the document (title, meta tags, styles, scripts that don't render directly).</p>
+
+      <h3>body Element</h3>
+      <pre><code>&lt;body&gt;...&lt;/body&gt;</code></pre>
+      <p>Contains the visible content of the page.</p>
+
+      <div class="file-ref">
+        <strong>index.html (lines 1-30)</strong>
+        This application follows this exact structure. The head contains meta tags, and the body contains the containers and the script tag.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Elements and Tags</h2>
+      <p>An HTML element is defined by a start tag, content, and an end tag:</p>
+
+      <pre><code>&lt;tagname&gt;Content goes here&lt;/tagname&gt;</code></pre>
+
+      <p>Some elements are self-closing (void elements):</p>
+      <pre><code>&lt;img src="image.jpg" /&gt;
+&lt;br /&gt;
+&lt;input type="text" /&gt;</code></pre>
+
+      <div class="key-point">
+        <strong>In This Application</strong>
+        The HTML uses mostly container elements (<code>div</code>) that JavaScript fills with content. The actual content (questions, buttons, text) is generated by JavaScript, not written in HTML.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Attributes</h2>
+      <p>Attributes provide additional information about elements:</p>
+
+      <pre><code>&lt;tagname attribute="value"&gt;Content&lt;/tagname&gt;</code></pre>
+
+      <h3>Common Attributes</h3>
+      <ul>
+        <li><code>id</code> — Unique identifier for an element</li>
+        <li><code>class</code> — One or more class names for styling</li>
+        <li><code>src</code> — Source URL for images, scripts, etc.</li>
+        <li><code>href</code> — URL for links</li>
+        <li><code>alt</code> — Alternative text for images</li>
+        <li><code>data-*</code> — Custom data attributes</li>
+      </ul>
+
+      <div class="file-ref">
+        <strong>index.html (lines 24-25)</strong>
+        <code>&lt;div id="photo-stage" class="photo-stage" aria-hidden="true"&gt;&lt;/div&gt;<br>&lt;div id="app" class="app" role="main"&gt;&lt;/div&gt;</code>
+      </div>
+
+      <p>This application uses:</p>
+      <ul>
+        <li><code>id</code> — To select elements with JavaScript</li>
+        <li><code>class</code> — For CSS styling</li>
+        <li><code>aria-hidden</code> — For accessibility (hides decorative elements from screen readers)</li>
+        <li><code>role</code> — For accessibility (semantic role)</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Semantic HTML</h2>
+      <p>Semantic HTML uses elements that clearly describe their meaning:</p>
+
+      <h3>Semantic Elements</h3>
+      <ul>
+        <li><code>&lt;header&gt;</code> — Introductory content</li>
+        <li><code>&lt;nav&gt;</code> — Navigation links</li>
+        <li><code>&lt;main&gt;</code> — Main content</li>
+        <li><code>&lt;section&gt;</code> — Thematic grouping</li>
+        <li><code>&lt;article&gt;</code> — Self-contained content</li>
+        <li><code>&lt;aside&gt;</code> — Content aside from main content</li>
+        <li><code>&lt;footer&gt;</code> — Footer information</li>
+      </ul>
+
+      <div class="file-ref">
+        <strong>src/main.js (lines 120-123)</strong>
+        <code>section.setAttribute("aria-label", "Introduction");</code>
+      </div>
+
+      <p>While the static HTML is minimal, the JavaScript-generated HTML uses semantic elements. For example, each screen is wrapped in a <code>&lt;section&gt;</code> element with an ARIA label for accessibility.</p>
+
+      <div class="key-point">
+        <strong>Why Semantic HTML Matters</strong>
+        Semantic HTML improves accessibility (screen readers understand the structure), SEO (search engines understand the content), and maintainability (code is easier to understand).
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Common HTML Elements</h2>
+
+      <h3>div</h3>
+      <p>A generic container for content. It has no semantic meaning.</p>
+      <pre><code>&lt;div class="container"&gt;...&lt;/div&gt;</code></pre>
+
+      <div class="file-ref">
+        <strong>index.html (lines 24-25)</strong>
+        The application uses <code>div</code> elements as containers for the photo stage and the main app content.
+      </div>
+
+      <h3>section</h3>
+      <p>A thematic grouping of content, typically with a heading.</p>
+      <pre><code>&lt;section&gt;<br>  &lt;h2&gt;Section Title&lt;/h2&gt;<br>  &lt;p&gt;Section content&lt;/p&gt;<br>&lt;/section&gt;</code></pre>
+
+      <div class="file-ref">
+        <strong>src/main.js (lines 120-137)</strong>
+        <code>const section = document.createElement("section");<br>section.className = "screen screen--landing";</code>
+      </div>
+
+      <h3>button</h3>
+      <p>A clickable button.</p>
+      <pre><code>&lt;button type="button"&gt;Click me&lt;/button&gt;</code></pre>
+
+      <div class="file-ref">
+        <strong>src/main.js (line 129)</strong>
+        <code>&lt;button type="button" class="btn btn--primary" data-action="start"&gt;</code>
+      </div>
+
+      <h3>img</h3>
+      <p>An embedded image.</p>
+      <pre><code>&lt;img src="photo.jpg" alt="Description of the image" /&gt;</code></pre>
+
+      <div class="file-ref">
+        <strong>src/main.js (lines 334-335)</strong>
+        <code>&lt;img src="" alt="" loading="lazy" decoding="async" /&gt;</code>
+      </div>
+
+      <h3>p</h3>
+      <p>A paragraph of text.</p>
+      <pre><code>&lt;p&gt;This is a paragraph.&lt;/p&gt;</code></pre>
+
+      <div class="file-ref">
+        <strong>src/main.js (line 126)</strong>
+        <code>&lt;p class="fade-in fade-in--1 text-lead"&gt;${escapeHtml(intro.line1)}&lt;/p&gt;</code>
+      </div>
+
+      <h3>h1-h6</h3>
+      <p>Headings, with h1 being the most important and h6 the least.</p>
+      <pre><code>&lt;h1&gt;Main Heading&lt;/h1&gt;<br>&lt;h2&gt;Subheading&lt;/h2&gt;</code></pre>
+
+      <div class="file-ref">
+        <strong>src/main.js (line 127)</strong>
+        <code>&lt;h1 class="fade-in fade-in--2 headline"&gt;${escapeHtml(intro.line2)}&lt;/h1&gt;</code>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Meta Tags</h2>
+      <p>Meta tags provide metadata about the HTML document. They're placed in the <code>&lt;head&gt;</code> element.</p>
+
+      <h3>charset</h3>
+      <pre><code>&lt;meta charset="UTF-8" /&gt;</code></pre>
+      <p>Specifies the character encoding. UTF-8 supports all characters and symbols.</p>
+
+      <h3>viewport</h3>
+      <pre><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1" /&gt;</code></pre>
+      <p>Controls how the page is displayed on mobile devices. This is crucial for responsive design.</p>
+
+      <h3>description</h3>
+      <pre><code>&lt;meta name="description" content="Page description" /&gt;</code></pre>
+      <p>A short description of the page, used by search engines.</p>
+
+      <h3>Open Graph (og:*)</h3>
+      <pre><code>&lt;meta property="og:title" content="Title" /&gt;<br>&lt;meta property="og:description" content="Description" /&gt;<br>&lt;meta property="og:image" content="image.jpg" /&gt;</code></pre>
+      <p>Used by social media platforms (Facebook, LinkedIn, etc.) to generate rich link previews.</p>
+
+      <div class="file-ref">
+        <strong>index.html (lines 5-18)</strong>
+        This application uses extensive meta tags for social media sharing. The Open Graph tags ensure that when someone shares the link, it shows a nice preview with an image and description.
+      </div>
+
+      <div class="key-point">
+        <strong>Important</strong>
+        Social media crawlers read the HTML meta tags, not JavaScript. That's why the meta tags are in <code>index.html</code> even though the application is JavaScript-driven.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Accessibility in HTML</h2>
+      <p>Accessible HTML ensures that everyone, including people with disabilities, can use your website.</p>
+
+      <h3>ARIA Attributes</h3>
+      <p>ARIA (Accessible Rich Internet Applications) attributes enhance accessibility:</p>
+      <ul>
+        <li><code>aria-label</code> — Provides a label for screen readers</li>
+        <li><code>aria-hidden="true"</code> — Hides element from screen readers</li>
+        <li><code>aria-live="polite"</code> — Announces changes to screen readers</li>
+        <li><code>role</code> — Defines the semantic role of an element</li>
+      </ul>
+
+      <div class="file-ref">
+        <strong>src/main.js (lines 122, 154, 250, 325)</strong>
+        <code>section.setAttribute("aria-label", "Introduction");<br>section.setAttribute("aria-label", `Question ${state.questionIndex + 1} of ${total}`);<br>section.setAttribute("aria-live", "polite");</code>
+      </div>
+
+      <h3>alt Text for Images</h3>
+      <pre><code>&lt;img src="photo.jpg" alt="A description of the image" /&gt;</code></pre>
+      <p>The <code>alt</code> attribute provides alternative text for screen readers. It's also displayed if the image fails to load.</p>
+
+      <div class="file-ref">
+        <strong>src/main.js (lines 372-374)</strong>
+        <code>img.alt = gameConfig.recipientName<br>  ? `A photo for ${gameConfig.recipientName}`<br>  : "A photo";</code>
+      </div>
+
+      <div class="key-point">
+        <strong>This Application's Accessibility</strong>
+        The application uses ARIA labels, aria-live for dynamic content, proper alt text, and semantic elements. This makes it accessible to screen reader users.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>HTML vs JavaScript Generation</h2>
+      <p>This application uses an interesting approach: the static HTML is minimal, and most content is generated by JavaScript.</p>
+
+      <h3>Static HTML (index.html)</h3>
+      <pre><code>&lt;div id="photo-stage"&gt;&lt;/div&gt;<br>&lt;div id="app"&gt;&lt;/div&gt;</code></pre>
+
+      <h3>JavaScript-Generated HTML (main.js)</h3>
+      <pre><code>section.innerHTML = `<br>  &lt;p class="text-lead"&gt;${escapeHtml(intro.line1)}&lt;/p&gt;<br>  &lt;h1 class="headline"&gt;${escapeHtml(intro.line2)}&lt;/h1&gt;<br>  &lt;button type="button" data-action="start"&gt;${escapeHtml(intro.button)}&lt;/button&gt;<br>`;</code></pre>
+
+      <div class="key-point">
+        <strong>Why This Approach?</strong>
+        This approach allows for dynamic content (the quiz state changes) and keeps the configuration in <code>config.js</code> rather than hardcoded in HTML. It's a state-driven rendering pattern.
+      </div>
+
+      <div class="try-it">
+        <strong>Try It Yourself</strong>
+        Open <code>index.html</code> in a browser without running the JavaScript. You'll see just the containers. The actual content only appears when JavaScript runs and fills the containers.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Exercise: Modify the HTML Structure</h2>
+      <p>Let's practice what you've learned:</p>
+
+      <ol>
+        <li>Open <code>index.html</code></li>
+        <li>Add a footer element before the closing <code>&lt;/body&gt;</code> tag:</li>
+      </ol>
+
+      <pre><code>&lt;footer&gt;<br>  &lt;p&gt;Made with love&lt;/p&gt;<br>&lt;/footer&gt;</code></pre>
+
+      <ol start="3">
+        <li>Save the file</li>
+        <li>Run <code>npm run dev</code></li>
+        <li>Open the browser and you should see the footer at the bottom</li>
+      </ol>
+
+      <div class="try-it">
+        <strong>Challenge</strong>
+        The footer appears but might not be styled. How would you style it? (Hint: You'll need to add CSS in <code>src/styles.css</code> or modify the JavaScript to add the footer dynamically.)
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>MCQ: Test Your Knowledge</h2>
+
+      <h3>Question 1</h3>
+      <p>What is the purpose of the <code>&lt;!DOCTYPE html&gt;</code> declaration?</p>
+      <ul>
+        <li>A) It creates a comment</li>
+        <li>B) It tells the browser this is an HTML5 document</li>
+        <li>C) It links to a stylesheet</li>
+        <li>D) It defines the page title</li>
+      </ul>
+      <p><strong>Answer:</strong> B</p>
+      <p><strong>Explanation:</strong> The DOCTYPE declaration tells the browser which version of HTML to use. In HTML5, it's simply <code>&lt;!DOCTYPE html&gt;</code>.</p>
+
+      <h3>Question 2</h3>
+      <p>Which HTML element is used for the main content of a page?</p>
+      <ul>
+        <li>A) <code>&lt;div&gt;</code></li>
+        <li>B) <code>&lt;section&gt;</code></li>
+        <li>C) <code>&lt;main&gt;</code></li>
+        <li>D) <code>&lt;content&gt;</code></li>
+      </ul>
+      <p><strong>Answer:</strong> C</p>
+      <p><strong>Explanation:</strong> <code>&lt;main&gt;</code> is the semantic element for the main content. <code>&lt;div&gt;</code> is generic, and <code>&lt;section&gt;</code> is for thematic groupings.</p>
+
+      <h3>Question 3</h3>
+      <p>What is the purpose of the <code>alt</code> attribute on images?</p>
+      <ul>
+        <li>A) To provide a tooltip</li>
+        <li>B) To style the image</li>
+        <li>C) To provide alternative text for screen readers</li>
+        <li>D) To link the image</li>
+      </ul>
+      <p><strong>Answer:</strong> C</p>
+      <p><strong>Explanation:</strong> The <code>alt</code> attribute provides alternative text for screen readers and is displayed if the image fails to load.</p>
+    </div>
+
+    <div class="section">
+      <h2>Interview Question</h2>
+      <p><strong>Question:</strong> Why is semantic HTML important for accessibility?</p>
+
+      <p><strong>Answer:</strong> Semantic HTML uses elements that clearly describe their meaning (like <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;article&gt;</code>). Screen readers use these semantic elements to understand the structure of the page and navigate it more effectively. For example, a screen reader user can jump between headings or navigation elements. Without semantic HTML, the page would just be a series of <code>&lt;div&gt;</code> elements, which provides no meaning to assistive technologies.</p>
+    </div>
+
+    <div class="section">
+      <h2>Summary</h2>
+      <p>In this module, you learned:</p>
+      <ul>
+        <li>HTML document structure (DOCTYPE, html, head, body)</li>
+        <li>Elements, tags, and attributes</li>
+        <li>Semantic HTML and why it matters</li>
+        <li>Common HTML elements (div, section, button, img, p, h1-h6)</li>
+        <li>Meta tags for SEO and social media</li>
+        <li>Accessibility (ARIA, alt text)</li>
+        <li>How this application uses minimal static HTML and generates content with JavaScript</li>
+      </ul>
+
+      <p>Next, you'll learn about CSS — how to style HTML and make it look beautiful.</p>
+    </div>
+
+    <div class="next-nav">
+      <a href="module-0-how-this-application-works.html">← Module 0</a>
+      <a href="module-2-css.html">Module 2: CSS →</a>
+    </div>
+  </div>
+</body>
+</html>

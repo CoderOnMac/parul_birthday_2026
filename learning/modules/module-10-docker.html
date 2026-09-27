@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 10: Docker - Learning Center</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #f8f6f4; --bg-elevated: #ffffff; --text: #1a1816; --text-muted: #6b6560;
+      --accent: #c4a098; --accent-soft: rgba(196, 160, 152, 0.1); --border: rgba(26, 24, 22, 0.08);
+      --shadow: 0 4px 20px rgba(26, 24, 22, 0.08); --radius: 12px;
+      --font-sans: system-ui, -apple-system, "SF Pro Text", "Segoe UI", Inter, sans-serif;
+      --font-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+    }
+    body { font-family: var(--font-sans); background: var(--bg); color: var(--text); line-height: 1.7; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    .nav { margin-bottom: 2rem; }
+    .nav a { color: var(--accent); text-decoration: none; font-weight: 500; }
+    h1 { font-size: 2.5rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+    .subtitle { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem; }
+    .section { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-bottom: 2rem; }
+    h2 { font-size: 1.75rem; font-weight: 600; margin-bottom: 1rem; }
+    h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.75rem; margin-top: 1.5rem; }
+    p { margin-bottom: 1rem; }
+    code { font-family: var(--font-mono); background: var(--accent-soft); padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+    pre { background: #1a1816; color: #f8f6f4; padding: 1.5rem; border-radius: var(--radius); overflow-x: auto; margin: 1rem 0; }
+    pre code { background: none; padding: 0; color: inherit; }
+    .key-point { background: linear-gradient(135deg, var(--accent-soft), transparent); border-left: 4px solid var(--accent); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .key-point strong { display: block; margin-bottom: 0.5rem; color: var(--accent); }
+    .diagram { background: var(--accent-soft); border: 1px solid var(--accent); border-radius: var(--radius); padding: 1.5rem; margin: 1.5rem 0; font-family: var(--font-mono); font-size: 0.9rem; }
+    .progress-bar { background: var(--border); height: 4px; border-radius: 999px; margin: 2rem 0; overflow: hidden; }
+    .progress-fill { background: var(--accent); height: 100%; width: 100%; border-radius: 999px; }
+    .next-nav { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; border-top: 1px solid var(--border); margin-top: 2rem; }
+    .next-nav a { background: var(--bg-elevated); border: 1px solid var(--border); padding: 0.75rem 1.5rem; border-radius: var(--radius); text-decoration: none; color: var(--text); font-weight: 500; }
+    .next-nav a:hover { border-color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav"><a href="../index.html">← Back to Learning Center</a></div>
+    <h1>Module 10: Docker</h1>
+    <p class="subtitle">Containers, images, and local development environments</p>
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+
+    <div class="section">
+      <h2>What is Docker?</h2>
+      <p><strong>Docker</strong> is a platform for developing, shipping, and running applications in containers. Containers are lightweight, standalone packages that include everything needed to run an application.</p>
+      <div class="key-point">
+        <strong>Docker is Local-Only for This Project</strong>
+        The Docker setup in this project is for local development and learning only. It is NOT part of the production deployment. Production uses GitHub Pages directly.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Image vs Container</h2>
+      <p><strong>Image</strong> is a read-only template for creating containers. <strong>Container</strong> is a running instance of an image.</p>
+      <div class="diagram">
+Image (Template)
+  ↓
+docker run
+  ↓
+Container (Running Instance)
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Dockerfile</h2>
+      <p>A <strong>Dockerfile</strong> is a script that defines how to build a Docker image.</p>
+      <pre><code>FROM node:20-alpine<br>WORKDIR /app<br>COPY package*.json ./<br>RUN npm ci<br>COPY . .<br>EXPOSE 5173<br>CMD ["npm", "run", "dev"]</code></pre>
+      <div class="key-point">
+        <strong>Dockerfile.local</strong>
+        This project uses <code>Dockerfile.local</code> (not <code>Dockerfile</code>) to make it clear it's for local development only.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Dockerfile Instructions</h2>
+      <h3>FROM</h3>
+      <pre><code>FROM node:20-alpine</code></pre>
+      <p>Specifies the base image. This uses Node.js 20 on Alpine Linux (small image).</p>
+      <h3>WORKDIR</h3>
+      <pre><code>WORKDIR /app</code></pre>
+      <p>Sets the working directory for subsequent instructions.</p>
+      <h3>COPY</h3>
+      <pre><code>COPY package*.json ./<br>COPY . .</code></pre>
+      <p>Copies files from the host to the container.</p>
+      <h3>RUN</h3>
+      <pre><code>RUN npm ci</code></pre>
+      <p>Executes a command during the build process.</p>
+      <h3>EXPOSE</h3>
+      <pre><code>EXPOSE 5173</code></pre>
+      <p>Documents which port the container listens on.</p>
+      <h3>CMD</h3>
+      <pre><code>CMD ["npm", "run", "dev"]</code></pre>
+      <p>Specifies the command to run when the container starts.</p>
+    </div>
+
+    <div class="section">
+      <h2>Docker Compose</h2>
+      <p><strong>Docker Compose</strong> is a tool for defining and running multi-container applications.</p>
+      <pre><code>version: '3'<br>services:<br>  app:<br>    build:<br>      context: .<br>      dockerfile: Dockerfile.local<br>    ports:<br>      - "5173:5173"<br>    volumes:<br>      - .:/app<br>      - /app/node_modules</code></pre>
+      <div class="key-point">
+        <strong>docker-compose.local.yml</strong>
+        This project uses <code>docker-compose.local.yml</code> for local development. It includes volume mounting for hot reload.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Building and Running</h2>
+      <h3>Build Image</h3>
+      <pre><code>docker build -f Dockerfile.local -t parul-birthday-local .</code></pre>
+      <h3>Run Container</h3>
+      <pre><code>docker run -p 5173:5173 parul-birthday-local</code></pre>
+      <h3>Use Docker Compose</h3>
+      <pre><code>docker-compose -f docker-compose.local.yml up</code></pre>
+    </div>
+
+    <div class="section">
+      <h2>Why Docker for Local Development?</h2>
+      <ul>
+        <li>Reproducible environment (same as production)</li>
+        <li>Isolated dependencies (no conflicts with system)</li>
+        <li>Easy to share with team members</li>
+        <li>Learning Docker skills</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>MCQ: Test Your Knowledge</h2>
+      <h3>Question 1</h3>
+      <p>What is the difference between a Docker image and a container?</p>
+      <ul><li>A) Image is running, container is not</li><li>B) Image is a template, container is a running instance</li><li>C) They are the same thing</li><li>D) Container is a template, image is running</li></ul>
+      <p><strong>Answer:</strong> B</p>
+      <p><strong>Explanation:</strong> A Docker image is a read-only template for creating containers. A container is a running instance of an image. You can create multiple containers from the same image.</p>
+
+      <h3>Question 2</h3>
+      <p>What does the <code>FROM</code> instruction do in a Dockerfile?</p>
+      <ul><li>A) Copies files</li><li>B> Specifies the base image</li><li>C> Runs a command</li><li>D> Exposes a port</li></ul>
+      <p><strong>Answer:</strong> B</p>
+      <p><strong>Explanation:</strong> The <code>FROM</code> instruction specifies the base image to build from. All subsequent instructions are applied to this base image.</p>
+
+      <h3>Question 3</h3>
+      <p>What is Docker Compose used for?</p>
+      <ul><li>A) Writing compose music</li><li>B> Defining and running multi-container applications</li><li>C> Building images</li><li>D) Managing databases</li></ul>
+      <p><strong>Answer:</strong> B</p>
+      <p><strong>Explanation:</strong> Docker Compose is a tool for defining and running multi-container Docker applications. It uses YAML files to configure services, networks, and volumes.</p>
+    </div>
+
+    <div class="section">
+      <h2>Interview Question</h2>
+      <p><strong>Question:</strong> What is the difference between <code>COPY</code> and <code>ADD</code> in a Dockerfile?</p>
+      <p><strong>Answer:</strong> <code>COPY</code> copies files from the host to the container. <code>ADD</code> does the same but also has additional features: it can extract tar files automatically, and it can fetch files from URLs. Best practice is to use <code>COPY</code> unless you specifically need the extra features of <code>ADD</code>, as <code>COPY</code> is more explicit and predictable.</p>
+    </div>
+
+    <div class="section">
+      <h2>Summary</h2>
+      <p>In this module, you learned:</p>
+      <ul>
+        <li>What Docker is</li>
+        <li>Image vs container</li>
+        <li>Dockerfile and its instructions</li>
+        <li>Docker Compose</li>
+        <li>Building and running containers</li>
+        <li>Why Docker is useful for local development</li>
+        <li>That this project's Docker setup is local-only, not for production</li>
+      </ul>
+    </div>
+
+    <div class="next-nav">
+      <a href="module-9-github-actions.html">← Module 9</a>
+      <a href="module-debugging.html">Module 11: Debugging →</a>
+    </div>
+  </div>
+</body>
+</html>

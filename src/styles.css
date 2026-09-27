@@ -557,3 +557,22 @@ body {
     font-size: 1.125rem;
   }
 }
+
+/* ——— Footer ——— */
+footer {
+  position: fixed;
+  bottom: 0;
+  left: -25px;
+  width: 100%;
+  background: var(--bg-elevated);
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 0.875rem;
+  padding: var(--space-sm);
+  color: var(--text-muted);
+}
+
+footer p {
+  margin: 0;
+}
+

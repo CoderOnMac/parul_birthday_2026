@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 6: Package Managers & Build Tools - Learning Center</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #f8f6f4; --bg-elevated: #ffffff; --text: #1a1816; --text-muted: #6b6560;
+      --accent: #c4a098; --accent-soft: rgba(196, 160, 152, 0.1); --border: rgba(26, 24, 22, 0.08);
+      --shadow: 0 4px 20px rgba(26, 24, 22, 0.08); --radius: 12px;
+      --font-sans: system-ui, -apple-system, "SF Pro Text", "Segoe UI", Inter, sans-serif;
+      --font-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+    }
+    body { font-family: var(--font-sans); background: var(--bg); color: var(--text); line-height: 1.7; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    .nav { margin-bottom: 2rem; }
+    .nav a { color: var(--accent); text-decoration: none; font-weight: 500; }
+    h1 { font-size: 2.5rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+    .subtitle { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem; }
+    .section { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-bottom: 2rem; }
+    h2 { font-size: 1.75rem; font-weight: 600; margin-bottom: 1rem; }
+    h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.75rem; margin-top: 1.5rem; }
+    p { margin-bottom: 1rem; }
+    code { font-family: var(--font-mono); background: var(--accent-soft); padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+    pre { background: #1a1816; color: #f8f6f4; padding: 1.5rem; border-radius: var(--radius); overflow-x: auto; margin: 1rem 0; }
+    pre code { background: none; padding: 0; color: inherit; }
+    .key-point { background: linear-gradient(135deg, var(--accent-soft), transparent); border-left: 4px solid var(--accent); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .key-point strong { display: block; margin-bottom: 0.5rem; color: var(--accent); }
+    .file-ref { background: var(--accent-soft); padding: 0.75rem 1rem; border-radius: var(--radius); margin: 1rem 0; font-family: var(--font-mono); font-size: 0.85rem; }
+    .file-ref strong { display: block; margin-bottom: 0.25rem; color: var(--accent); }
+    .progress-bar { background: var(--border); height: 4px; border-radius: 999px; margin: 2rem 0; overflow: hidden; }
+    .progress-fill { background: var(--accent); height: 100%; width: 63%; border-radius: 999px; }
+    .next-nav { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; border-top: 1px solid var(--border); margin-top: 2rem; }
+    .next-nav a { background: var(--bg-elevated); border: 1px solid var(--border); padding: 0.75rem 1.5rem; border-radius: var(--radius); text-decoration: none; color: var(--text); font-weight: 500; }
+    .next-nav a:hover { border-color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav"><a href="../index.html">← Back to Learning Center</a></div>
+    <h1>Module 6: Package Managers & Build Tools</h1>
+    <p class="subtitle">npm, Vite, and the build process</p>
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+
+    <div class="section">
+      <h2>package.json</h2>
+      <p><code>package.json</code> is the heart of a Node.js project. It defines metadata, dependencies, and scripts.</p>
+      <div class="file-ref">
+        <strong>package.json (lines 1-15)</strong>
+        <code>{<br>  "name": "parul-birthday-2026",<br>  "version": "1.0.0",<br>  "type": "module",<br>  "scripts": {<br>    "dev": "vite",<br>    "build": "vite build",<br>    "preview": "vite preview"<br>  },<br>  "devDependencies": {<br>    "vite": "^6.0.0"<br>  }<br>}</code>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Dependencies vs DevDependencies</h2>
+      <p><strong>Dependencies</strong> are needed for the application to run. <strong>DevDependencies</strong> are only needed for development.</p>
+      <div class="key-point">
+        <strong>This Application Only Has DevDependencies</strong>
+        Since this is a static site with no runtime dependencies, Vite is the only dependency, and it's a devDependency (only needed for building).
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>npm Scripts</h2>
+      <p>npm scripts are shortcuts for common commands.</p>
+      <pre><code>"scripts": {<br>  "dev": "vite",<br>  "build": "vite build",<br>  "preview": "vite preview"<br>}</code></pre>
+      <div class="file-ref"><strong>package.json (lines 6-10)</strong>Run with <code>npm run dev</code>, <code>npm run build</code>, etc.</div>
+    </div>
+
+    <div class="section">
+      <h2>package-lock.json</h2>
+      <p><code>package-lock.json</code> locks the exact versions of dependencies. It ensures everyone gets the same versions.</p>
+      <div class="key-point">
+        <strong>Commit package-lock.json</strong>
+        This file must be committed to Git. GitHub Actions uses <code>npm ci</code> which requires this file to install exact versions.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Vite</h2>
+      <p><strong>Vite</strong> is a modern build tool that provides fast development and optimized production builds.</p>
+      <div class="file-ref">
+        <strong>vite.config.js (lines 25-32)</strong>
+        <code>export default defineConfig({<br>  base: resolveBasePath(),<br>  build: {<br>    outDir: "dist",<br>    assetsDir: "assets",<br>    emptyOutDir: true,<br>  },<br>});</code>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>The Build Process</h2>
+      <div class="diagram">
+Source files (src/)
+  ↓
+Vite processes
+  ↓
+Bundles JavaScript
+  ↓
+Minifies CSS/JS
+  ↓
+Adds hashes to filenames
+  ↓
+Outputs to dist/
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Base Path</h2>
+      <p>The base path determines where assets are loaded from. For GitHub Pages, it needs to include the repository name.</p>
+      <pre><code>BASE_PATH=/parul_birthday_2026/ npm run build</code></pre>
+      <div class="file-ref"><strong>vite.config.js (lines 8-23)</strong>The base path is resolved from environment variables or auto-detected.</div>
+    </div>
+
+    <div class="section">
+      <h2>MCQ: Test Your Knowledge</h2>
+      <h3>Question 1</h3>
+      <p>What is the difference between dependencies and devDependencies?</p>
+      <ul><li>A) dependencies are for production, devDependencies for development</li><li>B) dependencies are faster</li><li>C) devDependencies are required</li><li>D) There is no difference</li></ul>
+      <p><strong>Answer:</strong> A</p>
+      <p><strong>Explanation:</strong> Dependencies are needed for the application to run in production. DevDependencies are only needed during development (like build tools, linters, testing frameworks).</p>
+
+      <h3>Question 2</h3>
+      <p>What does Vite do?</p>
+      <ul><li>A) Writes CSS</li><li>B) Provides fast development and optimized builds</li><li>C) Manages Git</li><li>D) Deploys to servers</li></ul>
+      <p><strong>Answer:</strong> B</p>
+      <p><strong>Explanation:</strong> Vite is a build tool that provides fast hot module replacement during development and optimized production builds with bundling, minification, and asset optimization.</p>
+
+      <h3>Question 3</h3>
+      <p>Why is package-lock.json important?</p>
+      <ul><li>A) It makes the project look professional</li><li>B) It locks exact dependency versions</li><li>C) It's required by law</li><li>D) It makes the project faster</li></ul>
+      <p><strong>Answer:</strong> B</p>
+      <p><strong>Explanation:</strong> package-lock.json locks the exact versions of dependencies, ensuring everyone who runs <code>npm install</code> gets the same versions. This is crucial for reproducible builds.</p>
+    </div>
+
+    <div class="section">
+      <h2>Interview Question</h2>
+      <p><strong>Question:</strong> What is the difference between <code>npm install</code> and <code>npm ci</code>?</p>
+      <p><strong>Answer:</strong> <code>npm install</code> installs dependencies and may update package-lock.json if versions have changed. <code>npm ci</code> (clean install) installs dependencies exactly as specified in package-lock.json and never modifies it. <code>npm ci</code> is faster and is recommended for CI/CD environments because it ensures reproducible builds.</p>
+    </div>
+
+    <div class="section">
+      <h2>Summary</h2>
+      <p>In this module, you learned:</p>
+      <ul>
+        <li>package.json structure and purpose</li>
+        <li>Dependencies vs devDependencies</li>
+        <li>npm scripts</li>
+        <li>package-lock.json</li>
+        <li>Vite and the build process</li>
+        <li>Base path configuration</li>
+        <li>How this application uses these tools</li>
+      </ul>
+    </div>
+
+    <div class="next-nav">
+      <a href="module-5-web-architecture.html">← Module 5</a>
+      <a href="module-7-git.html">Module 7: Git →</a>
+    </div>
+  </div>
+</body>
+</html>

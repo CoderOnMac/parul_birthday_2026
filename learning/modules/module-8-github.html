@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 8: GitHub - Learning Center</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #f8f6f4; --bg-elevated: #ffffff; --text: #1a1816; --text-muted: #6b6560;
+      --accent: #c4a098; --accent-soft: rgba(196, 160, 152, 0.1); --border: rgba(26, 24, 22, 0.08);
+      --shadow: 0 4px 20px rgba(26, 24, 22, 0.08); --radius: 12px;
+      --font-sans: system-ui, -apple-system, "SF Pro Text", "Segoe UI", Inter, sans-serif;
+      --font-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+    }
+    body { font-family: var(--font-sans); background: var(--bg); color: var(--text); line-height: 1.7; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    .nav { margin-bottom: 2rem; }
+    .nav a { color: var(--accent); text-decoration: none; font-weight: 500; }
+    h1 { font-size: 2.5rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+    .subtitle { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem; }
+    .section { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-bottom: 2rem; }
+    h2 { font-size: 1.75rem; font-weight: 600; margin-bottom: 1rem; }
+    h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.75rem; margin-top: 1.5rem; }
+    p { margin-bottom: 1rem; }
+    code { font-family: var(--font-mono); background: var(--accent-soft); padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+    .key-point { background: linear-gradient(135deg, var(--accent-soft), transparent); border-left: 4px solid var(--accent); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .key-point strong { display: block; margin-bottom: 0.5rem; color: var(--accent); }
+    .progress-bar { background: var(--border); height: 4px; border-radius: 999px; margin: 2rem 0; overflow: hidden; }
+    .progress-fill { background: var(--accent); height: 100%; width: 81%; border-radius: 999px; }
+    .next-nav { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; border-top: 1px solid var(--border); margin-top: 2rem; }
+    .next-nav a { background: var(--bg-elevated); border: 1px solid var(--border); padding: 0.75rem 1.5rem; border-radius: var(--radius); text-decoration: none; color: var(--text); font-weight: 500; }
+    .next-nav a:hover { border-color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav"><a href="../index.html">← Back to Learning Center</a></div>
+    <h1>Module 8: GitHub</h1>
+    <p class="subtitle">Repositories, Actions, Pages, and collaboration</p>
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+
+    <div class="section">
+      <h2>What is GitHub?</h2>
+      <p><strong>GitHub</strong> is a web-based platform for hosting Git repositories. It provides collaboration features, issue tracking, CI/CD, and more.</p>
+      <div class="key-point">
+        <strong>GitHub for This Application</strong>
+        This application is hosted on GitHub, which provides: repository hosting, GitHub Actions for CI/CD, GitHub Pages for deployment, and issue tracking.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Repositories</h2>
+      <p>A <strong>repository</strong> (repo) is a Git project hosted on GitHub. It contains all the files, commit history, and settings.</p>
+    </div>
+
+    <div class="section">
+      <h2>GitHub Pages</h2>
+      <p><strong>GitHub Pages</strong> is a static site hosting service that serves websites directly from GitHub repositories.</p>
+      <div class="key-point">
+        <strong>This Application Uses GitHub Pages</strong>
+        The application is deployed to GitHub Pages, which serves the built files from the dist/ directory. GitHub Actions automatically deploys on push to main.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>GitHub Actions</h2>
+      <p><strong>GitHub Actions</strong> is a CI/CD platform that automates builds, tests, and deployments.</p>
+      <div class="key-point">
+        <strong>Automated Deployment</strong>
+        This application uses GitHub Actions to automatically build and deploy when you push to the main branch. No manual deployment steps needed.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Issues</h2>
+      <p><strong>Issues</strong> are used for bug tracking, feature requests, and discussions.</p>
+    </div>
+
+    <div class="section">
+      <h2>Pull Requests</h2>
+      <p><strong>Pull Requests</strong> (PRs) are used to propose changes to a repository. They allow code review and discussion before merging.</p>
+    </div>
+
+    <div class="section">
+      <h2>MCQ: Test Your Knowledge</h2>
+      <h3>Question 1</h3>
+      <p>What is GitHub Pages?</p>
+      <ul><li>A) A document format</li><li>B) A static site hosting service</li><li>C) A programming language</li><li>D) A database</li></ul>
+      <p><strong>Answer:</strong> B</p>
+      <p><strong>Explanation:</strong> GitHub Pages is a static site hosting service that serves websites directly from GitHub repositories. It's free and supports custom domains.</p>
+
+      <h3>Question 2</h3>
+      <p>What is the purpose of a Pull Request?</p>
+      <ul><li>A) To pull code from another repository</li><li>B) To propose changes for review before merging</li><li>C) To request access to a repository</li><li>D) To delete code</li></ul>
+      <p><strong>Answer:</strong> B</p>
+      <p><strong>Explanation:</strong> Pull Requests allow you to propose changes to a repository. They enable code review, discussion, and automated testing before merging the changes.</p>
+
+      <h3>Question 3</h3>
+      <p>What is GitHub Actions?</p>
+      <ul><li>A) A way to create buttons</li><li>B) A CI/CD platform for automation</li><li>C) A file format</li><li>D) A programming language</li></ul>
+      <p><strong>Answer:</strong> B</p>
+      <p><strong>Explanation:</strong> GitHub Actions is a CI/CD platform that automates builds, tests, and deployments. You can create workflows that run on events like push or pull request.</p>
+    </div>
+
+    <div class="section">
+      <h2>Interview Question</h2>
+      <p><strong>Question:</strong> What is the difference between a fork and a branch?</p>
+      <p><strong>Answer:</strong> A branch is a parallel version of a repository within the same repository. It's used for feature development and is merged back via pull requests. A fork is a complete copy of a repository under your own GitHub account. It's used when you want to contribute to someone else's project or when you don't have write access to the original repository. You make changes in your fork, then submit a pull request to the original repository.</p>
+    </div>
+
+    <div class="section">
+      <h2>Summary</h2>
+      <p>In this module, you learned:</p>
+      <ul>
+        <li>What GitHub is</li>
+        <li>Repositories</li>
+        <li>GitHub Pages</li>
+        <li>GitHub Actions</li>
+        <li>Issues and Pull Requests</li>
+        <li>How this application uses GitHub for hosting and deployment</li>
+      </ul>
+    </div>
+
+    <div class="next-nav">
+      <a href="module-7-git.html">← Module 7</a>
+      <a href="module-9-github-actions.html">Module 9: GitHub Actions →</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+# Local-only Docker Compose for development and learning
+# This is NOT used in production deployment
+# Production uses GitHub Pages directly
+
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    ports:
+      - "5173:5173"
+    volumes:
+      # Mount source code for hot reload
+      - .:/app
+      # Prevent node_modules from being overwritten
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - HOST=0.0.0.0
+    stdin_open: true
+    tty: true

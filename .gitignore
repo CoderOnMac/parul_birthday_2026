@@ -3,4 +3,7 @@ dist/
 .node-local/
 .pydeps/
 .DS_Store
-*.local
+# Keep Docker files for learning center
+!Dockerfile.local
+!docker-compose.local.yml
+.env

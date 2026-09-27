@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 4: Browser + DOM - Learning Center</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #f8f6f4; --bg-elevated: #ffffff; --text: #1a1816; --text-muted: #6b6560;
+      --accent: #c4a098; --accent-soft: rgba(196, 160, 152, 0.1); --border: rgba(26, 24, 22, 0.08);
+      --shadow: 0 4px 20px rgba(26, 24, 22, 0.08); --radius: 12px;
+      --font-sans: system-ui, -apple-system, "SF Pro Text", "Segoe UI", Inter, sans-serif;
+      --font-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+    }
+    body { font-family: var(--font-sans); background: var(--bg); color: var(--text); line-height: 1.7; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    .nav { margin-bottom: 2rem; }
+    .nav a { color: var(--accent); text-decoration: none; font-weight: 500; }
+    h1 { font-size: 2.5rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+    .subtitle { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem; }
+    .section { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-bottom: 2rem; }
+    h2 { font-size: 1.75rem; font-weight: 600; margin-bottom: 1rem; }
+    h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.75rem; margin-top: 1.5rem; }
+    p { margin-bottom: 1rem; }
+    code { font-family: var(--font-mono); background: var(--accent-soft); padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+    pre { background: #1a1816; color: #f8f6f4; padding: 1.5rem; border-radius: var(--radius); overflow-x: auto; margin: 1rem 0; }
+    pre code { background: none; padding: 0; color: inherit; }
+    .key-point { background: linear-gradient(135deg, var(--accent-soft), transparent); border-left: 4px solid var(--accent); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .key-point strong { display: block; margin-bottom: 0.5rem; color: var(--accent); }
+    .file-ref { background: var(--accent-soft); padding: 0.75rem 1rem; border-radius: var(--radius); margin: 1rem 0; font-family: var(--font-mono); font-size: 0.85rem; }
+    .file-ref strong { display: block; margin-bottom: 0.25rem; color: var(--accent); }
+    .diagram { background: var(--accent-soft); border: 1px solid var(--accent); border-radius: var(--radius); padding: 1.5rem; margin: 1.5rem 0; font-family: var(--font-mono); font-size: 0.9rem; }
+    .progress-bar { background: var(--border); height: 4px; border-radius: 999px; margin: 2rem 0; overflow: hidden; }
+    .progress-fill { background: var(--accent); height: 100%; width: 45%; border-radius: 999px; }
+    .next-nav { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; border-top: 1px solid var(--border); margin-top: 2rem; }
+    .next-nav a { background: var(--bg-elevated); border: 1px solid var(--border); padding: 0.75rem 1.5rem; border-radius: var(--radius); text-decoration: none; color: var(--text); font-weight: 500; }
+    .next-nav a:hover { border-color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav"><a href="../index.html">← Back to Learning Center</a></div>
+    <h1>Module 4: Browser + DOM</h1>
+    <p class="subtitle">How the browser renders and manipulates the DOM</p>
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+
+    <div class="section">
+      <h2>The DOM (Document Object Model)</h2>
+      <p>The <strong>DOM</strong> is a tree-like representation of the HTML document. JavaScript can access and modify the DOM to change the page dynamically.</p>
+      <div class="diagram">
+HTML
+  ↓
+Browser parses HTML
+  ↓
+DOM Tree Created
+  ↓
+JavaScript accesses DOM
+  ↓
+User interaction
+  ↓
+DOM updated
+  ↓
+Browser repaints
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>DOM in This Application</h2>
+      <p>The application uses the DOM extensively:</p>
+      <pre><code>const app = document.getElementById("app");<br>const photoStageEl = document.getElementById("photo-stage");</code></pre>
+      <div class="file-ref"><strong>src/main.js (lines 9-10)</strong>Selecting DOM elements by ID.</div>
+    </div>
+
+    <div class="section">
+      <h2>Selecting Elements</h2>
+      <h3>getElementById</h3>
+      <pre><code>const app = document.getElementById("app");</code></pre>
+      <div class="file-ref"><strong>src/main.js (line 9)</strong>Selects an element by its unique ID.</div>
+      <h3>querySelector</h3>
+      <pre><code>const el = document.querySelector('.btn');</code></pre>
+      <p>Selects the first element matching a CSS selector.</p>
+      <h3>querySelectorAll</h3>
+      <pre><code>const cards = app.querySelectorAll(".option-card");</code></pre>
+      <div class="file-ref"><strong>src/main.js (line 203)</strong>Selects all elements matching a CSS selector.</div>
+    </div>
+
+    <div class="section">
+      <h2>Creating Elements</h2>
+      <pre><code>const section = document.createElement("section");<br>section.className = "screen screen--landing";</code></pre>
+      <div class="file-ref"><strong>src/main.js (lines 120-121)</strong>Creating a new section element and setting its class.</div>
+    </div>
+
+    <div class="section">
+      <h2>Modifying Elements</h2>
+      <h3>innerHTML</h3>
+      <pre><code>section.innerHTML = `<br>  &lt;p class="text-lead"&gt;${escapeHtml(intro.line1)}&lt;/p&gt;<br>  &lt;h1 class="headline"&gt;${escapeHtml(intro.line2)}&lt;/h1&gt;<br>`;</code></pre>
+      <div class="file-ref"><strong>src/main.js (lines 124-132)</strong>Setting the HTML content of an element.</div>
+      <h3>textContent</h3>
+      <pre><code>calcText.textContent = text;</code></pre>
+      <div class="file-ref"><strong>src/main.js (line 295)</strong>Setting the text content (safer than innerHTML for text).</div>
+      <h3>classList</h3>
+      <pre><code>card.classList.add("option-card--selected");<br>card.classList.remove("option-card--selected");<br>card.classList.toggle("photo-stage--reduced");</code></pre>
+      <div class="file-ref"><strong>src/main.js (line 206)</strong>Adding, removing, and toggling CSS classes.</div>
+      <h3>setAttribute</h3>
+      <pre><code>section.setAttribute("aria-label", "Introduction");</code></pre>
+      <div class="file-ref"><strong>src/main.js (line 122)</strong>Setting HTML attributes.</div>
+    </div>
+
+    <div class="section">
+      <h2>Event Bubbling</h2>
+      <p>Events bubble up the DOM tree from the target element to its ancestors.</p>
+      <div class="diagram">
+User clicks button
+  ↓
+Event fires on button
+  ↓
+Event bubbles to parent section
+  ↓
+Event bubbles to app
+  ↓
+Event bubbles to body
+      </div>
+      <div class="key-point">
+        <strong>Event Delegation</strong>
+        Instead of adding event listeners to every element, you can add one listener to a parent and use event bubbling. This application doesn't use event delegation, but it's a useful pattern for large lists.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Browser APIs</h2>
+      <p>The browser provides many APIs that JavaScript can use:</p>
+      <h3>window.matchMedia</h3>
+      <pre><code>const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;</code></pre>
+      <div class="file-ref"><strong>src/main.js (line 12)</strong>Checking if the user prefers reduced motion.</div>
+      <h3>window.setTimeout</h3>
+      <pre><code>window.setTimeout(() => { render(); }, 1000);</code></pre>
+      <div class="file-ref"><strong>src/main.js (line 210)</strong>Executing code after a delay.</div>
+      <h3>window.scrollTo</h3>
+      <pre><code>window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });</code></pre>
+      <div class="file-ref"><strong>src/main.js (line 89)</strong>Scrolling to the top of the page.</div>
+    </div>
+
+    <div class="section">
+      <h2>The Render Cycle</h2>
+      <p>This application follows a render cycle:</p>
+      <div class="diagram">
+State changes
+  ↓
+render() called
+  ↓
+app.innerHTML = "" (clear DOM)
+  ↓
+New HTML generated
+  ↓
+DOM updated
+  ↓
+Browser repaints
+  ↓
+User sees new content
+      </div>
+      <div class="file-ref"><strong>src/main.js (lines 88-116)</strong>The render function implements this cycle.</div>
+    </div>
+
+    <div class="section">
+      <h2>MCQ: Test Your Knowledge</h2>
+      <h3>Question 1</h3>
+      <p>What is the DOM?</p>
+      <ul><li>A) A programming language</li><li>B) A tree-like representation of HTML</li><li>C) A database</li><li>D) A styling language</li></ul>
+      <p><strong>Answer:</strong> B</p>
+      <p><strong>Explanation:</strong> The DOM (Document Object Model) is a tree-like representation of the HTML document that JavaScript can access and modify.</p>
+
+      <h3>Question 2</h3>
+      <p>What is the difference between <code>innerHTML</code> and <code>textContent</code>?</p>
+      <ul><li>A) innerHTML is faster</li><li>B) textContent parses HTML, innerHTML doesn't</li><li>C) innerHTML parses HTML, textContent doesn't</li><li>D) There is no difference</li></ul>
+      <p><strong>Answer:</strong> C</p>
+      <p><strong>Explanation:</strong> <code>innerHTML</code> parses and renders HTML tags, while <code>textContent</code> sets plain text without parsing HTML. textContent is safer for user input.</p>
+
+      <h3>Question 3</h3>
+      <p>What is event bubbling?</p>
+      <ul><li>A) Events that float</li><li>B) Events propagating up the DOM tree</li><li>C) Events that are cancelled</li><li>D) Events that are delayed</li></ul>
+      <p><strong>Answer:</strong> B</p>
+      <p><strong>Explanation:</strong> Event bubbling is when an event propagates from the target element up through its ancestors in the DOM tree.</p>
+    </div>
+
+    <div class="section">
+      <h2>Interview Question</h2>
+      <p><strong>Question:</strong> What is the difference between <code>getElementById</code> and <code>querySelector</code>?</p>
+      <p><strong>Answer:</strong> <code>getElementById</code> is a faster, more specific method that selects an element by its unique ID. <code>querySelector</code> is more flexible and can use any CSS selector, but it's slightly slower. <code>querySelector</code> also has a <code>querySelectorAll</code> variant that returns all matching elements, while <code>getElementById</code> only returns one element.</p>
+    </div>
+
+    <div class="section">
+      <h2>Summary</h2>
+      <p>In this module, you learned:</p>
+      <ul>
+        <li>What the DOM is</li>
+        <li>How to select elements (getElementById, querySelector, querySelectorAll)</li>
+        <li>How to create and modify elements</li>
+        <li>Event bubbling and event delegation</li>
+        <li>Browser APIs (matchMedia, setTimeout, scrollTo)</li>
+        <li>The render cycle</li>
+        <li>How this application uses the DOM for state-driven rendering</li>
+      </ul>
+    </div>
+
+    <div class="next-nav">
+      <a href="module-3-javascript.html">← Module 3</a>
+      <a href="module-5-web-architecture.html">Module 5: Web Architecture →</a>
+    </div>
+  </div>
+</body>
+</html>

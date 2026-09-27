@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module 9: GitHub Actions - Learning Center</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #f8f6f4; --bg-elevated: #ffffff; --text: #1a1816; --text-muted: #6b6560;
+      --accent: #c4a098; --accent-soft: rgba(196, 160, 152, 0.1); --border: rgba(26, 24, 22, 0.08);
+      --shadow: 0 4px 20px rgba(26, 24, 22, 0.08); --radius: 12px;
+      --font-sans: system-ui, -apple-system, "SF Pro Text", "Segoe UI", Inter, sans-serif;
+      --font-mono: "SF Mono", Monaco, "Cascadia Code", monospace;
+    }
+    body { font-family: var(--font-sans); background: var(--bg); color: var(--text); line-height: 1.7; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    .nav { margin-bottom: 2rem; }
+    .nav a { color: var(--accent); text-decoration: none; font-weight: 500; }
+    h1 { font-size: 2.5rem; font-weight: 600; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+    .subtitle { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem; }
+    .section { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; margin-bottom: 2rem; }
+    h2 { font-size: 1.75rem; font-weight: 600; margin-bottom: 1rem; }
+    h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.75rem; margin-top: 1.5rem; }
+    p { margin-bottom: 1rem; }
+    code { font-family: var(--font-mono); background: var(--accent-soft); padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+    pre { background: #1a1816; color: #f8f6f4; padding: 1.5rem; border-radius: var(--radius); overflow-x: auto; margin: 1rem 0; }
+    pre code { background: none; padding: 0; color: inherit; }
+    .key-point { background: linear-gradient(135deg, var(--accent-soft), transparent); border-left: 4px solid var(--accent); padding: 1rem 1.5rem; margin: 1rem 0; border-radius: 0 var(--radius) var(--radius) 0; }
+    .key-point strong { display: block; margin-bottom: 0.5rem; color: var(--accent); }
+    .file-ref { background: var(--accent-soft); padding: 0.75rem 1rem; border-radius: var(--radius); margin: 1rem 0; font-family: var(--font-mono); font-size: 0.85rem; }
+    .file-ref strong { display: block; margin-bottom: 0.25rem; color: var(--accent); }
+    .diagram { background: var(--accent-soft); border: 1px solid var(--accent); border-radius: var(--radius); padding: 1.5rem; margin: 1.5rem 0; font-family: var(--font-mono); font-size: 0.9rem; }
+    .progress-bar { background: var(--border); height: 4px; border-radius: 999px; margin: 2rem 0; overflow: hidden; }
+    .progress-fill { background: var(--accent); height: 100%; width: 90%; border-radius: 999px; }
+    .next-nav { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; border-top: 1px solid var(--border); margin-top: 2rem; }
+    .next-nav a { background: var(--bg-elevated); border: 1px solid var(--border); padding: 0.75rem 1.5rem; border-radius: var(--radius); text-decoration: none; color: var(--text); font-weight: 500; }
+    .next-nav a:hover { border-color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav"><a href="../index.html">← Back to Learning Center</a></div>
+    <h1>Module 9: GitHub Actions</h1>
+    <p class="subtitle">CI/CD, workflows, and automated deployment</p>
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+
+    <div class="section">
+      <h2>What is GitHub Actions?</h2>
+      <p><strong>GitHub Actions</strong> is a CI/CD (Continuous Integration/Continuous Deployment) platform that automates builds, tests, and deployments.</p>
+      <div class="key-point">
+        <strong>This Application Uses GitHub Actions</strong>
+        The application automatically builds and deploys to GitHub Pages when you push to the main branch. No manual deployment needed.
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>The Workflow File</h2>
+      <p>Workflows are defined in YAML files in <code>.github/workflows/</code>.</p>
+      <div class="file-ref">
+        <strong>.github/workflows/pages.yml (lines 1-61)</strong>
+        <code>name: Deploy static site<br><br>on:<br>  push:<br>    branches: [main, master]<br>  workflow_dispatch:</code>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Workflow Anatomy</h2>
+      <h3>name</h3>
+      <pre><code>name: Deploy static site</code></pre>
+      <p>The name of the workflow (displayed in GitHub Actions tab).</p>
+      <div class="file-ref"><strong>.github/workflows/pages.yml (line 1)</strong></div>
+
+      <h3>on (Triggers)</h3>
+      <pre><code>on:<br>  push:<br>    branches: [main, master]<br>  workflow_dispatch:</code></pre>
+      <p>When the workflow runs: on push to main/master, or manually via workflow_dispatch.</p>
+      <div class="file-ref"><strong>.github/workflows/pages.yml (lines 3-6)</strong></div>
+
+      <h3>permissions</h3>
+      <pre><code>permissions:<br>  contents: read<br>  pages: write<br>  id-token: write</code></pre>
+      <p>What the workflow can do: read repository contents, write to Pages, use OIDC tokens.</p>
+      <div class="file-ref"><strong>.github/workflows/pages.yml (lines 8-11)</strong></div>
+
+      <h3>concurrency</h3>
+      <pre><code>concurrency:<br>  group: pages<br>  cancel-in-progress: true</code></pre>
+      <p>Prevents multiple deployments from running simultaneously. Cancels in-progress runs.</p>
+      <div class="file-ref"><strong>.github/workflows/pages.yml (lines 13-15)</strong></div>
+
+      <h3>jobs</h3>
+      <pre><code>jobs:<br>  build:<br>    runs-on: ubuntu-latest</code></pre>
+      <p>Jobs are the main units of work. This workflow has a build job and a deploy job.</p>
+      <div class="file-ref"><strong>.github/workflows/pages.yml (lines 17-19)</strong></div>
+
+      <h3>steps</h3>
+      <pre><code>steps:<br>  - name: Checkout<br>    uses: actions/checkout@v4</code></pre>
+      <p>Steps are the individual tasks within a job. Each step runs sequentially.</p>
+      <div class="file-ref"><strong>.github/workflows/pages.yml (lines 21-22)</strong></div>
+
+      <h3>uses (Actions)</h3>
+      <pre><code>uses: actions/checkout@v4<br>uses: actions/configure-pages@v5<br>uses: actions/setup-node@v4</code></pre>
+      <p>Reusable actions from the GitHub Actions marketplace.</p>
+      <div class="file-ref"><strong>.github/workflows/pages.yml (lines 22, 25, 28)</strong></div>
+
+      <h3>run (Shell Commands)</h3>
+      <pre><code>run: npm ci<br>run: npm run build</code></pre>
+      <p>Shell commands to execute.</p>
+      <div class="file-ref"><strong>.github/workflows/pages.yml (lines 34, 39)</strong></div>
+
+      <h3>with (Parameters)</h3>
+      <pre><code>with:<br>  node-version: "20"<br>  cache: npm</code></pre>
+      <p>Parameters for actions.</p>
+      <div class="file-ref"><strong>.github/workflows/pages.yml (lines 29-31)</strong></div>
+
+      <h3>env (Environment Variables)</h3>
+      <pre><code>env:<br>  BASE_PATH: /${{ github.event.repository.name }}/</code></pre>
+      <p>Environment variables for the step.</p>
+      <div class="file-ref"><strong>.github/workflows/pages.yml (lines 37-38)</strong></div>
+    </div>
+
+    <div class="section">
+      <h2>The Complete Lifecycle</h2>
+      <div class="diagram>
+Developer pushes to GitHub
+  ↓
+GitHub receives push
+  ↓
+Workflow triggered (on: push)
+  ↓
+Runner starts (ubuntu-latest)
+  ↓
+Checkout code (actions/checkout@v4)
+  ↓
+Setup Node.js (actions/setup-node@v4)
+  ↓
+Install dependencies (npm ci)
+  ↓
+Build application (npm run build)
+  ↓
+Verify build output
+  ↓
+Upload artifact (actions/upload-pages-artifact@v3)
+  ↓
+Deploy job starts
+  ↓
+Deploy to GitHub Pages (actions/deploy-pages@v4)
+  ↓
+Available at username.github.io/repo-name/
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Viewing Workflow Runs</h2>
+      <ol>
+        <li>Go to your repository on GitHub</li>
+        <li>Click the "Actions" tab</li>
+        <li>Click on a workflow run to see details</li>
+        <li>Expand jobs and steps to see logs</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <h2>Debugging Failed Workflows</h2>
+      <ol>
+        <li>Find the failed step (red X)</li>
+        <li>Click on the step to expand logs</li>
+        <li>Read the error message</li>
+        <li>Check the step before (dependency failure?)</li>
+        <li>Fix the issue and push again</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <h2>MCQ: Test Your Knowledge</h2>
+      <h3>Question 1</h3>
+      <p>What is the purpose of the <code>on</code> section in a GitHub Actions workflow?</p>
+      <ul><li>A) To define environment variables</li><li>B) To specify when the workflow runs</li><li>C) To define jobs</li><li>D) To set permissions</li></ul>
+      <p><strong>Answer:</strong> B</p>
+      <p><strong>Explanation:</strong> The <code>on</code> section defines the triggers for the workflow — when it should run (e.g., on push, on pull request, on schedule, or manually).</p>
+
+      <h3>Question 2</h3>
+      <p>What is the difference between a job and a step?</p>
+      <ul><li>A) Jobs run in parallel, steps run sequentially</li><li>B) Jobs are for deployment, steps are for building</li><li>C) Jobs contain steps</li><li>D) There is no difference</li></ul>
+      <p><strong>Answer:</strong> C</p>
+      <p><strong>Explanation:</strong> A job is a collection of steps that run on the same runner. Steps are the individual tasks within a job. Jobs can run in parallel, but steps within a job run sequentially.</p>
+
+      <h3>Question 3</h3>
+      <p>What does <code>uses: actions/checkout@v4</code> do?</p>
+      <ul><li>A) Checks out code from the repository</li><li>B) Checks the Node version</li><li>C) Checks for errors</li><li>D) Checks out a branch</li></ul>
+      <p><strong>Answer:</strong> A</p>
+      <p><strong>Explanation:</strong> <code>actions/checkout@v4</code> is a GitHub Action that checks out your repository code onto the runner, so subsequent steps can access the files.</p>
+    </div>
+
+    <div class="section">
+      <h2>Interview Question</h2>
+      <p><strong>Question:</strong> What is the difference between <code>run</code> and <code>uses</code> in a GitHub Actions step?</p>
+      <p><strong>Answer:</strong> <code>run</code> executes a shell command directly on the runner (e.g., <code>run: npm install</code>). <code>uses</code> specifies a reusable action from the GitHub Actions marketplace or a custom action (e.g., <code>uses: actions/checkout@v4</code>). <code>run</code> is for custom commands, while <code>uses</code> is for pre-built actions that handle common tasks like checkout, setup, deployment, etc.</p>
+    </div>
+
+    <div class="section">
+      <h2>Summary</h2>
+      <p>In this module, you learned:</p>
+      <ul>
+        <li>What GitHub Actions is</li>
+        <li>Workflow anatomy (name, on, permissions, jobs, steps)</li>
+        <li>Actions vs shell commands</li>
+        <li>The complete deployment lifecycle</li>
+        <li>How to view and debug workflow runs</li>
+        <li>How this application uses GitHub Actions for automated deployment</li>
+      </ul>
+    </div>
+
+    <div class="next-nav">
+      <a href="module-8-github.html">← Module 8</a>
+      <a href="module-10-docker.html">Module 10: Docker →</a>
+    </div>
+  </div>
+</body>
+</html>
