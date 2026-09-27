@@ -19,6 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       VITE_WIFE_NAME: ${{ secrets.VITE_WIFE_NAME }}
+      VITE_WIFE_NAME_SHORT: ${{ secrets.VITE_WIFE_NAME_SHORT }}
       VITE_HUSBAND_NAME: ${{ secrets.VITE_HUSBAND_NAME }}
     steps:
       - name: Checkout
