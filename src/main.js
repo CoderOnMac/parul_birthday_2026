@@ -19,6 +19,16 @@ const state = {
   revealStep: 0,
 };
 
+const wife_name = import.meta.env.VITE_WIFE_NAME;
+const husband_name = import.meta.env.VITE_HUSBAND_NAME;
+const wife_name_short = import.meta.env.VITE_WIFE_NAME_SHORT;
+
+document.title = `Something for you, ${wife_name_short}`;
+
+const footer = document.createElement("footer");
+footer.innerHTML = `<p>Made with ❤️ for ${wife_name} (wife of ${husband_name})</p>`;
+document.body.appendChild(footer);
+
 function assetUrl(path) {
   if (!path) return "";
   const base = import.meta.env.BASE_URL || "./";
@@ -383,13 +393,6 @@ function showFatalError() {
     </section>
   `;
 }
-
-const parul = import.meta.env.VITE_WIFE_NAME;
-const deepansh = import.meta.env.VITE_HUSBAND_NAME;
-
-const footer = document.createElement("footer");
-footer.innerHTML = `<p>Made with ❤️ for ${parul} (wife of ${deepansh})</p>`;
-document.body.appendChild(footer);
 
 
 try {
