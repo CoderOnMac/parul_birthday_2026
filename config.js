@@ -138,8 +138,8 @@ export const gameConfig = {
   },
 
   finalReveal: {
-    label: "Happy Birthday {{wife_name_short}}, my love.\nOne last little thing.",
-    headline: "You are the brightest part of my universe.",
+    label: "Happy Birthday {{wife_name_short}}, my love.",
+    headline: "You are the brightest part of my life.",
     subhead:
       "I just wanted to show you\nwhat I see when I look at you.",
     mainAnswer: "It's the smiles you bring into my universe.",
@@ -149,7 +149,7 @@ export const gameConfig = {
 
 From surreal Bali mornings to dreamy Swiss rides and every serene sunset in between, my entire world has found its home in you. Through the sartorial elegance of your sarees and anarkalis, your stolen glances, and sweet candour, you remain the epitome of ebullience, optimism, and my greatest joy.
 
-This year feels quietly special. Whatever waits beyond it, I want to meet it with you. You mean more to me than words can hold. You are the smile that doesn’t just light up a room—it lights up my entire universe.
+This year feels quietly special. Whatever waits beyond it, I want to meet it with you. Left or Right. I want it that way. You mean more to me than words can hold and I am in love with the Shape of You; I wont ever let you go. You make me breathless; All I want is to fly with you, as its written in the stars and while we ride the waves together, its clear just how fast the night changes. What doesnt change is your Smile, which doesn’t just light up a room—it lights up my entire universe.
 
 I wish you a lifetime of boundless success, endless laughter, and vibrant warmth. Never lose that endearing spark, winsome smile, and radiant grace that make you so endlessly cherished by everyone around you. Here’s to you, and to your brightest tomorrows. Happy Birthday, Meri Pyaari Tweety :)!`,
     signoff: "From {{husband_name_short}}",
@@ -165,7 +165,7 @@ I wish you a lifetime of boundless success, endless laughter, and vibrant warmth
       { src: "assets/photos/img_parul_cool_2.jpg", caption: "Swings and You — A little ephemeral, a lot unforgettable" },
       { src: "assets/photos/img_parul_cool_3.jpeg", caption: "Sterling - Drenched in the Depths of BLYOU" },
       { src: "assets/photos/img_parul_trad_1.jpg", caption: "Meri Sohniye teri saree wali adaa wich main kho jawaan" },
-      { src: "assets/photos/img_dp_cool_1.png", caption: "Purple elements, black shades, and me falling for you" },
+      { src: "assets/photos/img_dp_cool_1.jpg", caption: "Purple elements, black shades, and me falling for you" },
       { src: "assets/photos/img_dp_bern_1.jpeg", caption: "Snowy mountains, deep lakes, and my Swiss resides in you" },
       { src: "assets/photos/img_parul_tulip.jpg", caption: "Petals in the glass, all my universe in your eyes." },
     ],
