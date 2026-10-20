@@ -7,7 +7,7 @@ export const gameConfig = {
   recipientName: "Parul",
 
   meta: {
-    pageTitle: "Something for you",
+    pageTitle: "Parul, Something for You",
     description: "I made something for you. Open it when you have a minute.",
     ogTitle: "I made something for you.",
     ogDescription: "Five questions. No cheating. (Trust me.)",
