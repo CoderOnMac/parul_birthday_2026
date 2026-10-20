@@ -7,3 +7,4 @@ dist/
 !Dockerfile.local
 !docker-compose.local.yml
 .env
+public/assets/photos/*
