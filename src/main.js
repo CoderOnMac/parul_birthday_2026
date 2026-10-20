@@ -95,6 +95,11 @@ function pickReaction(question, optionIndex) {
 }
 
 function render() {
+  if (state.phase === "reveal" && app.classList.contains("app--reveal")) {
+    renderReveal(true);
+    return;
+  }
+
   window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
   app.innerHTML = "";
   app.className = `app app--${state.phase}`;
@@ -171,7 +176,10 @@ function shuffle(items) {
 }
 
 function photoCaption(photoPath) {
-  const configured = gameConfig.finalReveal?.photos?.find((photo) => photo.src === photoPath);
+  const photoKey = (path) => path.split("/").pop().replace(/\.(jpe?g|png|webp|avif|gif)$/i, "").toLowerCase();
+  const configured = gameConfig.finalReveal?.photos?.find(
+    (photo) => photoKey(photo.src) === photoKey(photoPath),
+  );
   return configured?.caption || "A memory worth keeping";
 }
 
@@ -369,7 +377,34 @@ function renderCalculating() {
   }, TIMING.calcMin + 2200);
 }
 
-function renderReveal() {
+function revealStepMarkup(step, f) {
+  if (step.restart) {
+    return `<button type="button" class="btn btn--ghost reveal-step--new" data-action="restart">${escapeHtml(f.restartLabel)}</button>`;
+  }
+  if (step.photos) {
+    if (!state.remainingPhotos.length) return "";
+    return `<section class="final-memories reveal-step--new" aria-label="More memories">
+      <p class="final-memories__eyebrow">A few more memories, just for us</p>
+      <div class="final-memories__grid">
+        ${state.remainingPhotos.map((photo, i) => `<figure class="final-memory final-memory--${(i % 4) + 1}${photoClass(photo)}">
+          <div class="final-memory__image"><img src="${assetUrl(photo)}" data-photo-path="${escapeHtml(photo)}" alt="A birthday memory" loading="eager" decoding="sync" /></div>
+          <figcaption>${escapeHtml(photoCaption(photo))}</figcaption>
+        </figure>`).join("")}
+      </div>
+    </section>`;
+  }
+  return `<p class="${step.class} reveal-step reveal-step--new">${step.html}</p>`;
+}
+
+function queueRevealAdvance(totalSteps) {
+  if (state.revealStep >= totalSteps - 1) return;
+  window.setTimeout(() => {
+    state.revealStep += 1;
+    render();
+  }, TIMING.revealStep);
+}
+
+function renderReveal(isProgressiveUpdate = false) {
   const f = gameConfig.finalReveal;
   const steps = [
     { key: "label", class: "reveal-label", html: multilineHtml(personalize(f.label)) },
@@ -384,6 +419,20 @@ function renderReveal() {
   ];
 
   const visible = steps.slice(0, state.revealStep + 1);
+
+  if (isProgressiveUpdate) {
+    const content = app.querySelector(".screen--final .screen__content--final");
+    if (!content) return;
+    content.insertAdjacentHTML("beforeend", revealStepMarkup(steps[state.revealStep], f));
+    bindPhotoFallbacks(content);
+    const restartBtn = content.querySelector('[data-action="restart"]:not([data-bound])');
+    if (restartBtn) {
+      restartBtn.dataset.bound = "true";
+      restartBtn.addEventListener("click", resetExperience);
+    }
+    queueRevealAdvance(steps.length);
+    return;
+  }
 
   const section = document.createElement("section");
   section.className = "screen screen--final";
@@ -400,28 +449,7 @@ function renderReveal() {
       <span class="letter-stamp__text">FOR YOU</span>
     </div>
     <div class="screen__content screen__content--final">`;
-  visible.forEach((step) => {
-    if (step.restart) {
-      inner += `<button type="button" class="btn btn--ghost reveal-step--new" data-action="restart">${escapeHtml(f.restartLabel)}</button>`;
-      return;
-    }
-    if (step.photos) {
-      if (state.remainingPhotos.length) {
-        inner += `<section class="final-memories reveal-step--new" aria-label="More memories">
-          <p class="final-memories__eyebrow">The memories still waiting to be seen</p>
-          <div class="final-memories__grid">
-            ${state.remainingPhotos.map((photo, i) => `<figure class="final-memory final-memory--${(i % 4) + 1}${photoClass(photo)}">
-              <div class="final-memory__image"><img src="${assetUrl(photo)}" data-photo-path="${escapeHtml(photo)}" alt="A birthday memory" loading="eager" decoding="sync" /></div>
-              <figcaption>${escapeHtml(photoCaption(photo))}</figcaption>
-            </figure>`).join("")}
-          </div>
-        </section>`;
-      }
-      return;
-    }
-    const isNew = step.key === visible[visible.length - 1]?.key;
-    inner += `<p class="${step.class} reveal-step${isNew ? " reveal-step--new" : ""}">${step.html}</p>`;
-  });
+  visible.forEach((step) => { inner += revealStepMarkup(step, f); });
   inner += "</div></article>";
 
   section.innerHTML = inner;
@@ -433,12 +461,7 @@ function renderReveal() {
     restartBtn.addEventListener("click", resetExperience);
   }
 
-  if (state.revealStep < steps.length - 1) {
-    window.setTimeout(() => {
-      state.revealStep += 1;
-      render();
-    }, TIMING.revealStep);
-  }
+  queueRevealAdvance(steps.length);
 }
 
 function resetExperience() {
