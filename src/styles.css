@@ -562,7 +562,7 @@ body {
 footer {
   position: fixed;
   bottom: 0;
-  left: -25px;
+  left: 0;
   width: 100%;
   background: var(--bg-elevated);
   border-top: 1px solid var(--border);

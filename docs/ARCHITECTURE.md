@@ -210,13 +210,12 @@ parul_birthday_2026/
 │   ├── interview-prep.md     ← Interview questions
 │   ├── glossary.md           ← Glossary of terms
 │   ├── LEARNING_CENTER_CHANGELOG.md ← Changes for learning center
-│   └── cheatsheets/          ← Quick reference sheets
-│
-├── learning/                 ← Learning Center (new, educational)
-│   ├── index.html            ← Learning Center entry point
-│   ├── modules/              ← Course modules
-│   ├── quizzes/              ← MCQs and quizzes
-│   ├── labs/                 ├── Practical coding exercises
+│   ├── cheatsheets/          ← Quick reference sheets
+│   └── learning/             ← Learning Center (new, educational)
+│       ├── index.html        ← Learning Center entry point
+│       ├── modules/          ← Course modules
+│       ├── quizzes/          ← MCQs and quizzes
+│       ├── labs/             ← Practical coding exercises
 │   └── assets/               ← Learning-specific assets
 │
 ├── debug/                    ← Local debugging environment (not deployed)

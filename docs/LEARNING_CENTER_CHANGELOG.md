@@ -4,6 +4,8 @@
 
 This document describes the changes made to transform the existing Parul Birthday application into a comprehensive Learning Center / Code University.
 
+**Note:** The Learning Center was originally created in a top-level `learning/` directory. It has since been moved to `docs/learning/` to keep all documentation together. All references in documentation have been updated accordingly.
+
 ---
 
 ## What Was Added
@@ -31,8 +33,8 @@ This document describes the changes made to transform the existing Parul Birthda
 
 ### Learning Center UI
 
-- **learning/index.html** - Main Learning Center homepage with navigation
-- **learning/modules/** - 11 comprehensive learning modules:
+- **docs/learning/index.html** - Main Learning Center homepage with navigation
+- **docs/learning/modules/** - 11 comprehensive learning modules:
   - module-0-how-this-application-works.html
   - module-1-html.html
   - module-2-css.html
@@ -62,6 +64,7 @@ This document describes the changes made to transform the existing Parul Birthda
 ### Modified Files
 
 - **.gitignore** - Updated to allow Dockerfile.local and docker-compose.local.yml (needed for learning center)
+- **src/styles.css** - Fixed footer spacing issue (changed `left: -25px` to `left: 0` in footer CSS)
 
 ### Production Files (Untouched)
 
@@ -70,11 +73,14 @@ The following production files were NOT modified:
 - config.js
 - src/main.js
 - src/photoStage.js
-- src/styles.css
 - package.json
 - vite.config.js
 - .github/workflows/pages.yml
 - public/ (all assets)
+
+### Production Files (Minor Fixes)
+
+- **src/styles.css** - Fixed footer spacing issue (changed `left: -25px` to `left: 0` in footer CSS at line 565). This was a visual bug fix and does not affect application functionality.
 
 **The existing application continues to work exactly as before.**
 
@@ -100,7 +106,8 @@ The following additions are for local development and learning only. They are NO
 - debug/ directory (Python debugging harness)
 - .vscode/launch.json
 - .vscode/tasks.json
-- learning/ directory (Learning Center UI)
+- docs/learning/ directory (Learning Center UI)
+- docs/cheatsheets/ directory (cheat sheets)
 - docs/ directory (additional documentation)
 - commands.md (command handbook)
 
@@ -113,8 +120,9 @@ The following additions are for local development and learning only. They are NO
 If you want to remove the learning/debugging layer and return to a clean production repository:
 
 1. Delete these directories/files:
-   - learning/
-   - docs/ (except README.md if you want to keep it)
+   - docs/learning/
+   - docs/cheatsheets/
+   - docs/ (except ARCHITECTURE.md if you want to keep it)
    - commands.md
    - Dockerfile.local
    - docker-compose.local.yml
@@ -158,7 +166,7 @@ Before considering this work complete, the following should be verified:
 - [ ] Run `npm run dev` to test locally
 - [ ] Run `npm run build` to test production build
 - [ ] Run `npm run preview` to test production preview
-- [ ] Access Learning Center at learning/index.html
+- [ ] Access Learning Center at docs/learning/index.html
 - [ ] Test Docker environment (optional)
 - [ ] Test debugpy with VS Code (optional)
 - [ ] Verify GitHub Actions still works (on next push)
@@ -226,5 +234,8 @@ This transformation successfully:
 10. ✅ Created glossary and cheat sheets
 11. ✅ Connected all learning to this specific application
 12. ✅ Maintained clear separation between production and learning layers
+13. ✅ Organized all documentation under docs/ directory
+14. ✅ Added real debugging case studies
+15. ✅ Fixed footer spacing bug in production CSS
 
 The repository now serves as both a production application and a long-term reference for learning web development, Git, GitHub, DevOps, and debugging.

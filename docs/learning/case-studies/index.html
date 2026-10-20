@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case Studies - Learning Center</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, "SF Pro Text", "Segoe UI", sans-serif;
+      background: #f8f6f4;
+      color: #1a1816;
+      line-height: 1.6;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    header {
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(26, 24, 22, 0.1);
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: #6b6560;
+    }
+
+    .case-study {
+      background: white;
+      border: 1px solid rgba(26, 24, 22, 0.08);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .case-study:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(26, 24, 22, 0.08);
+    }
+
+    .case-study h2 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .case-study p {
+      color: #6b6560;
+      margin-bottom: 1rem;
+    }
+
+    .case-study a {
+      color: #c4a098;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .case-study a:hover {
+      text-decoration: underline;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      color: #c4a098;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="../index.html" class="back-link">← Back to Learning Center</a>
+
+    <header>
+      <h1>Case Studies</h1>
+      <p class="subtitle">Real debugging examples from this project</p>
+    </header>
+
+    <div class="case-study">
+      <h2>Footer Spacing Fix</h2>
+      <p>How to fix a footer that doesn't span the full width of the screen.</p>
+      <a href="footer-spacing-fix.md">Read case study →</a>
+    </div>
+
+    <div class="case-study">
+      <h2>Adjusting Message Timing</h2>
+      <p>How to control the timing between message displays across different questions.</p>
+      <a href="adjusting-message-timing.md">Read case study →</a>
+    </div>
+  </div>
+</body>
+</html>

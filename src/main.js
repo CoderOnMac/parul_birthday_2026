@@ -5,10 +5,10 @@ const app = document.getElementById("app");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const TIMING = {
-  reactionHold: prefersReducedMotion ? 800 : 2200,
-  surpriseLine: prefersReducedMotion ? 600 : 1800,
-  calcMin: prefersReducedMotion ? 1200 : 3200,
-  revealStep: prefersReducedMotion ? 400 : 900,
+  reactionHold: prefersReducedMotion ? 1800 : 3200,
+  surpriseLine: prefersReducedMotion ? 1600 : 3800,
+  calcMin: prefersReducedMotion ? 2200 : 4200,
+  revealStep: prefersReducedMotion ? 1000 : 2000,
 };
 
 const state = {
@@ -28,6 +28,8 @@ document.title = `Something for you, ${wife_name_short}`;
 const footer = document.createElement("footer");
 footer.innerHTML = `<p>Made with ❤️ for ${wife_name} (wife of ${husband_name})</p>`;
 document.body.appendChild(footer);
+console.log(import.meta.env);
+
 
 function assetUrl(path) {
   if (!path) return "";
@@ -279,8 +281,8 @@ function renderCalculating() {
   const calcText = section.querySelector(".calc-text");
   const phases = [
     { at: TIMING.calcMin * 0.45, text: fakeScore.pivot },
-    { at: TIMING.calcMin * 0.65, text: fakeScore.noScore },
-    { at: TIMING.calcMin * 0.85, text: fakeScore.bridge },
+    { at: TIMING.calcMin * 1, text: fakeScore.noScore },
+    { at: TIMING.calcMin * 1, text: fakeScore.bridge },
   ];
 
   phases.forEach(({ at, text }) => {
@@ -294,7 +296,7 @@ function renderCalculating() {
     state.phase = "reveal";
     state.revealStep = 0;
     render();
-  }, TIMING.calcMin + 400);
+  }, TIMING.calcMin + 2200);
 }
 
 function renderReveal() {
