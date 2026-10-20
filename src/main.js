@@ -17,7 +17,10 @@ const state = {
   answersLocked: false,
   surpriseStep: 0,
   revealStep: 0,
+  photoAssignments: [],
 };
+
+const discoveredPhotos = typeof __PHOTO_MANIFEST__ !== "undefined" ? __PHOTO_MANIFEST__ : [];
 
 const wife_name = import.meta.env.VITE_WIFE_NAME;
 const husband_name = import.meta.env.VITE_HUSBAND_NAME;
@@ -136,7 +139,26 @@ function startGame() {
   state.phase = "question";
   state.questionIndex = 0;
   state.answersLocked = false;
+  const shuffledPhotos = shuffle(discoveredPhotos);
+  state.photoAssignments = gameConfig.questions.map(() => []);
+  shuffledPhotos.forEach((photo, index) => {
+    state.photoAssignments[index % gameConfig.questions.length].push(photo);
+  });
   render();
+}
+
+function shuffle(items) {
+  const copy = [...items];
+  for (let i = copy.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function photoCaption(photoPath) {
+  const configured = gameConfig.finalReveal?.photos?.find((photo) => photo.src === photoPath);
+  return configured?.caption || "A memory worth keeping";
 }
 
 function renderQuestion() {
@@ -149,6 +171,7 @@ function renderQuestion() {
   section.setAttribute("aria-label", `Question ${state.questionIndex + 1} of ${total}`);
 
   const letters = ["A", "B", "C", "D"];
+  const memories = state.photoAssignments[state.questionIndex] || [];
 
   section.innerHTML = `
     <header class="quiz-header">
@@ -157,19 +180,28 @@ function renderQuestion() {
         <div class="progress__fill" style="width: ${progress}%"></div>
       </div>
     </header>
-    <div class="screen__content question-enter">
-      <h2 class="question-title">${escapeHtml(q.question)}</h2>
-      <div class="options" role="list">
-        ${q.options
-          .map(
-            (opt, i) => `
-          <button type="button" class="option-card" data-index="${i}" role="listitem">
-            <span class="option-card__letter">${letters[i] || ""}.</span>
-            <span class="option-card__text">${escapeHtml(opt)}</span>
-          </button>
-        `
-          )
-          .join("")}
+    <div class="question-layout question-enter">
+      <div class="question-memory" aria-label="A memory for this question">
+        ${memories.map((photo, i) => `<figure class="question-photo question-photo--${(i % 3) + 1}">
+          <div class="question-photo__image"><img src="${assetUrl(photo)}" alt="A photo memory" loading="eager" fetchpriority="high" decoding="sync" /></div>
+          <figcaption>${escapeHtml(photoCaption(photo))}</figcaption>
+        </figure>`).join("")}
+      </div>
+      <div class="question-copy">
+        <p class="question-kicker">Memories are woven with you</p>
+        <h2 class="question-title">${escapeHtml(q.question)}</h2>
+        <div class="options" role="list">
+          ${q.options
+            .map(
+              (opt, i) => `
+            <button type="button" class="option-card" data-index="${i}" role="listitem">
+              <span class="option-card__letter">${letters[i] || ""}.</span>
+              <span class="option-card__text">${escapeHtml(opt)}</span>
+            </button>
+          `
+            )
+            .join("")}
+        </div>
       </div>
     </div>
   `;
@@ -309,7 +341,6 @@ function renderReveal() {
     { key: "bridge", class: "reveal-bridge", html: escapeHtml(f.bridge) },
     { key: "coda", class: "reveal-coda", html: escapeHtml(f.coda) },
     { key: "message", class: "reveal-message", html: multilineHtml(f.personalMessage) },
-    { key: "photo", class: "reveal-photo-wrap", photo: true },
     { key: "restart", class: "reveal-actions", restart: true },
   ];
 
@@ -325,12 +356,6 @@ function renderReveal() {
       inner += `<button type="button" class="btn btn--ghost reveal-step--new" data-action="restart">${escapeHtml(f.restartLabel)}</button>`;
       return;
     }
-    if (step.photo) {
-      inner += `<figure class="reveal-photo reveal-photo--pending" id="reveal-photo" hidden>
-        <img src="" alt="" loading="lazy" decoding="async" />
-      </figure>`;
-      return;
-    }
     const isNew = step.key === visible[visible.length - 1]?.key;
     inner += `<p class="${step.class} reveal-step${isNew ? " reveal-step--new" : ""}">${step.html}</p>`;
   });
@@ -338,10 +363,6 @@ function renderReveal() {
 
   section.innerHTML = inner;
   app.appendChild(section);
-
-  if (visible.some((s) => s.photo)) {
-    mountOptionalPhoto(section.querySelector("#reveal-photo"));
-  }
 
   const restartBtn = section.querySelector('[data-action="restart"]');
   if (restartBtn) {
@@ -356,34 +377,13 @@ function renderReveal() {
   }
 }
 
-function mountOptionalPhoto(figure) {
-  if (!figure) return;
-  const path = gameConfig.finalReveal.photo;
-  if (!path) return;
-
-  const img = figure.querySelector("img");
-  const url = assetUrl(path);
-  img.src = url;
-  img.alt = gameConfig.recipientName
-    ? `A photo for ${gameConfig.recipientName}`
-    : "A photo";
-
-  img.onload = () => {
-    figure.hidden = false;
-    figure.classList.remove("reveal-photo--pending");
-    figure.classList.add("reveal-photo--new");
-  };
-  img.onerror = () => {
-    figure.remove();
-  };
-}
-
 function resetExperience() {
   state.phase = "landing";
   state.questionIndex = 0;
   state.answersLocked = false;
   state.surpriseStep = 0;
   state.revealStep = 0;
+  state.photoAssignments = [];
   render();
 }
 

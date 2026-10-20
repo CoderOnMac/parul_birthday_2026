@@ -1,4 +1,15 @@
 import { defineConfig } from "vite";
+import fs from "node:fs";
+import path from "node:path";
+
+function discoverPhotos() {
+  const photoDir = path.resolve("public/assets/photos");
+  if (!fs.existsSync(photoDir)) return [];
+  return fs.readdirSync(photoDir)
+    .filter((file) => /\.(jpe?g|png|webp|avif|gif)$/i.test(file))
+    .sort((a, b) => a.localeCompare(b))
+    .map((file) => `assets/photos/${file}`);
+}
 
 /**
  * Dev (npm run dev): base "./" — localhost works as usual.
@@ -24,6 +35,9 @@ function resolveBasePath() {
 
 export default defineConfig({
   base: resolveBasePath(),
+  define: {
+    __PHOTO_MANIFEST__: JSON.stringify(discoverPhotos()),
+  },
   build: {
     outDir: "dist",
     assetsDir: "assets",

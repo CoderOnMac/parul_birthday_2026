@@ -125,9 +125,9 @@ export const gameConfig = {
 
   surprise: {
     leadIn: "One last thing…",
-    line1: "You got all the important ones wrong.",
-    line2: "Because the answer was never one thing.",
-    line3: "It's you.",
+    line1: "You got all the important ones right.",
+    line2: "But the answer was never one thing.",
+    line3: "It's everythingyou.",
   },
 
   fakeScore: {
@@ -149,7 +149,22 @@ export const gameConfig = {
 
 Somehow, you make ordinary days feel a little less ordinary.
 And I don't think I tell you that enough.`,
-    photo: "assets/photo.jpg",
+    // Add your own bold, short memory below each photo (keep each one under 10 words).
+    // The gallery automatically uses every image in public/assets/photos/.
+    photos: [
+      { src: "assets/photos/img_dp_bali_1.jpeg", caption: "Bintang Bali Resort— Chill vibes and slow mornings" },
+      { src: "assets/photos/img_dp_ind_1.jpeg", caption: "Elan Mall — the Fire, Water, Earth, Roses and Us" },
+      { src: "assets/photos/img_dp_ind_2.jpeg", caption: "Humari Engagement — Our Hearts Always Dancing Together" },
+      { src: "assets/photos/img_parul_bali_1.jpg", caption: "Lake Batur Bali — Boats, Topiaries, Mountains and You" },
+      { src: "assets/photos/img_parul_bali_2.jpeg", caption: "Tanah Lot Bali — Getting Lost in the Ocean of your Eyes" },
+      { src: "assets/photos/img_parul_cool_1.jpeg", caption: "American look — Epitome of Modernity and Elegance" },
+      { src: "assets/photos/img_parul_cool_2.jpeg", caption: "Swings and You — A little ephemeral, a lot unforgettable" },
+      { src: "assets/photos/img_parul_cool_3.jpeg", caption: "Sterling - Drenched in the Depths of BLYOU" },
+      { src: "assets/photos/img_parul_trad_1.jpeg", caption: "Meri Sohniye teri saree wali adaa wich main kho jawaan" },
+      { src: "assets/photos/img_dp_cool_1.jpg", caption: "Purple Elements, Black Shades and Me Forever Falling for you" },
+      { src: "assets/photos/img_dp_bern_1.jpg", caption: "Snowy mountains, Deep Lakes and Dreamy rides, My Swiss resides in you" },
+      { src: "assets/photos/img_parul_tulip.jpg", caption: "Petals in the glass, all my universe in your eyes." },
+    ],
     restartLabel: "Start over ↗",
   },
 };
