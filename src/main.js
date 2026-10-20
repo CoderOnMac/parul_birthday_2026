@@ -26,6 +26,7 @@ const discoveredPhotos = typeof __PHOTO_MANIFEST__ !== "undefined" ? __PHOTO_MAN
 const wife_name = import.meta.env.VITE_WIFE_NAME;
 const husband_name = import.meta.env.VITE_HUSBAND_NAME;
 const wife_name_short = import.meta.env.VITE_WIFE_NAME_SHORT;
+const husband_name_short = import.meta.env.VITE_HUSBAND_NAME_SHORT;
 
 document.title = `Something for you, ${wife_name_short}`;
 
@@ -69,6 +70,14 @@ function escapeHtml(text) {
 
 function multilineHtml(text) {
   return escapeHtml(text).replace(/\n/g, "<br />");
+}
+
+function personalize(text) {
+  const names = {
+    wife_name_short: wife_name_short || wife_name || "you",
+    husband_name_short: husband_name_short || husband_name || "me",
+  };
+  return text.replace(/\{\{(wife_name_short|husband_name_short)\}\}/g, (_, key) => names[key]);
 }
 
 function pickReaction(question, optionIndex) {
@@ -363,13 +372,13 @@ function renderCalculating() {
 function renderReveal() {
   const f = gameConfig.finalReveal;
   const steps = [
-    { key: "label", class: "reveal-label", html: multilineHtml(f.label) },
+    { key: "label", class: "reveal-label", html: multilineHtml(personalize(f.label)) },
     { key: "headline", class: "reveal-headline", html: escapeHtml(f.headline) },
     { key: "subhead", class: "reveal-subhead", html: multilineHtml(f.subhead) },
     { key: "main", class: "reveal-main", html: escapeHtml(f.mainAnswer) },
     { key: "bridge", class: "reveal-bridge", html: escapeHtml(f.bridge) },
     { key: "coda", class: "reveal-coda", html: escapeHtml(f.coda) },
-    { key: "message", class: "reveal-message", html: multilineHtml(f.personalMessage) },
+    { key: "message", class: "reveal-message", html: multilineHtml(`${personalize(f.personalMessage)}\n\n${personalize(f.signoff || "From {{husband_name_short}}")}`) },
     { key: "remainingPhotos", class: "reveal-memories", photos: true },
     { key: "restart", class: "reveal-actions", restart: true },
   ];
@@ -380,7 +389,17 @@ function renderReveal() {
   section.className = "screen screen--final";
   section.setAttribute("aria-label", "Final message");
 
-  let inner = '<div class="screen__content screen__content--final">';
+  let inner = `<article class="birthday-letter">
+    <div class="letter-header" aria-hidden="true">
+      <span class="letter-header__eyebrow">A little letter for you</span>
+      <span class="letter-header__line"></span>
+      <span class="letter-header__date">With love · always</span>
+    </div>
+    <div class="letter-stamp" aria-label="A love stamp">
+      <span class="letter-stamp__heart">♥</span>
+      <span class="letter-stamp__text">FOR YOU</span>
+    </div>
+    <div class="screen__content screen__content--final">`;
   visible.forEach((step) => {
     if (step.restart) {
       inner += `<button type="button" class="btn btn--ghost reveal-step--new" data-action="restart">${escapeHtml(f.restartLabel)}</button>`;
@@ -403,7 +422,7 @@ function renderReveal() {
     const isNew = step.key === visible[visible.length - 1]?.key;
     inner += `<p class="${step.class} reveal-step${isNew ? " reveal-step--new" : ""}">${step.html}</p>`;
   });
-  inner += "</div>";
+  inner += "</div></article>";
 
   section.innerHTML = inner;
   app.appendChild(section);

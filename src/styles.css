@@ -106,7 +106,68 @@ body {
 .screen--final .screen__content--final { gap: clamp(1.1rem, 3vw, 1.8rem); }
 .screen--final .reveal-headline { max-width: 42rem; font-size: clamp(2.1rem, 6vw, 4.25rem); letter-spacing: -0.055em; }
 .screen--final .reveal-main { color: var(--button-bg); font-size: clamp(2rem, 6vw, 3.5rem); }
-.screen--final .reveal-message { max-width: 48rem; padding-top: clamp(1.2rem, 3vw, 2rem); border-top-color: rgba(196, 160, 152, 0.45); font-size: clamp(1rem, 2vw, 1.15rem); }
+.screen--final .reveal-message { max-width: 48rem; padding-top: clamp(1.2rem, 3vw, 2rem); border-top-color: rgba(196, 160, 152, 0.45); font-family: var(--font-serif); font-size: clamp(1.15rem, 2.2vw, 1.3rem); font-style: italic; line-height: 1.75; color: #4f3a35; }
+
+.birthday-letter {
+  position: relative;
+  width: 100%;
+  margin: 1rem 0;
+  overflow: hidden;
+  border: 1px solid rgba(147, 97, 79, 0.18);
+  border-radius: clamp(1.5rem, 4vw, 2.75rem);
+  background:
+    radial-gradient(circle at 12% 15%, rgba(223, 66, 49, 0.08), transparent 12rem),
+    linear-gradient(135deg, rgba(255, 254, 251, 0.98), rgba(255, 247, 242, 0.96));
+  box-shadow: 0 2rem 5rem rgba(92, 53, 43, 0.13), 0 0.2rem 0 rgba(255, 255, 255, 0.8) inset;
+}
+
+.letter-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: clamp(1.1rem, 3vw, 1.7rem) clamp(1.25rem, 5vw, 3.5rem) 0;
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.letter-header__line { flex: 1; height: 1px; background: rgba(147, 97, 79, 0.25); }
+.letter-header__date { color: rgba(147, 97, 79, 0.78); white-space: nowrap; }
+
+.letter-stamp {
+  position: absolute;
+  top: clamp(3.5rem, 7vw, 5rem);
+  right: clamp(1.25rem, 5vw, 3.5rem);
+  display: grid;
+  place-items: center;
+  width: clamp(4.75rem, 12vw, 7rem);
+  aspect-ratio: 1;
+  border: 1px dashed rgba(255, 247, 242, 0.9);
+  border-radius: 50%;
+  outline: 1px solid rgba(192, 57, 43, 0.45);
+  outline-offset: -0.35rem;
+  color: #fff8f4;
+  background: linear-gradient(145deg, #d64f42, #a92522);
+  box-shadow: 0 0.5rem 1rem rgba(125, 34, 29, 0.2), 0 0 0 0.35rem rgba(214, 79, 66, 0.08);
+  transform: rotate(9deg);
+}
+
+.letter-stamp__heart { margin-top: -0.15rem; font-size: clamp(1.3rem, 3vw, 2rem); line-height: 1; }
+.letter-stamp__text { margin-top: -0.4rem; font-size: 0.48rem; font-weight: 900; letter-spacing: 0.16em; }
+.birthday-letter .screen__content--final { padding: clamp(3.5rem, 8vw, 5.5rem) clamp(1.25rem, 5vw, 3.5rem) clamp(1.5rem, 4vw, 3rem); }
+.birthday-letter .reveal-label { max-width: 75%; font-family: "Snell Roundhand", "Segoe Script", "Brush Script MT", cursive; color: #8f4038; font-size: clamp(2.5rem, 8vw, 5.5rem); font-weight: 500; line-height: 0.94; letter-spacing: -0.04em; }
+.birthday-letter .reveal-headline { max-width: 36rem; }
+.birthday-letter .reveal-main { max-width: 42rem; }
+.birthday-letter .final-memories { margin-top: 1rem; }
+
+@media (max-width: 560px) {
+  .letter-header__eyebrow { max-width: 7rem; }
+  .letter-header__date { display: none; }
+  .letter-stamp { top: 3.7rem; right: 1.25rem; }
+  .birthday-letter .reveal-label { max-width: 88%; padding-right: 1.5rem; }
+}
 
 /* ——— Instant memory gallery ——— */
 .memory-gallery {

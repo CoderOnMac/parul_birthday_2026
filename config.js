@@ -138,20 +138,21 @@ export const gameConfig = {
   },
 
   finalReveal: {
-    label: "Happy birthday, my love.\nOne last little thing.",
+    label: "Happy Birthday {{wife_name_short}}, my love.\nOne last little thing.",
     headline: "You are the brightest part of my universe.",
     subhead:
       "I just wanted to show you\nwhat I see when I look at you.",
     mainAnswer: "It's the smiles you bring into my universe.",
     bridge: "The ones that make every place feel like home.",
     coda: "And honestly… it's all of you.",
-    personalMessage: `Happy birthday, my love.
+    personalMessage: `Happy Birthday {{wife_name_short}}, my love.
 
 From surreal Bali mornings to dreamy Swiss rides and every serene sunset in between, my entire world has found its home in you. Through the sartorial elegance of your sarees and anarkalis, your stolen glances, and sweet candour, you remain the epitome of ebullience, optimism, and my greatest joy.
 
 This year feels quietly special. Whatever waits beyond it, I want to meet it with you. You mean more to me than words can hold. You are the smile that doesn’t just light up a room—it lights up my entire universe.
 
 I wish you a lifetime of boundless success, endless laughter, and vibrant warmth. Never lose that endearing spark, winsome smile, and radiant grace that make you so endlessly cherished by everyone around you. Here’s to you, and to your brightest tomorrows. Happy Birthday, Meri Pyaari Tweety :)!`,
+    signoff: "From {{husband_name_short}}",
     // Add your own bold, short memory below each photo (keep each one under 10 words).
     // The gallery automatically uses every image in public/assets/photos/.
     photos: [
