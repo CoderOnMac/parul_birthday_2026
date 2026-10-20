@@ -18,6 +18,7 @@ const state = {
   surpriseStep: 0,
   revealStep: 0,
   photoAssignments: [],
+  remainingPhotos: [],
 };
 
 const discoveredPhotos = typeof __PHOTO_MANIFEST__ !== "undefined" ? __PHOTO_MANIFEST__ : [];
@@ -141,9 +142,13 @@ function startGame() {
   state.answersLocked = false;
   const shuffledPhotos = shuffle(discoveredPhotos);
   state.photoAssignments = gameConfig.questions.map(() => []);
+  const photoSlots = gameConfig.questions.length * 2;
   shuffledPhotos.forEach((photo, index) => {
-    state.photoAssignments[index % gameConfig.questions.length].push(photo);
+    if (index < photoSlots) {
+      state.photoAssignments[Math.floor(index / 2)].push(photo);
+    }
   });
+  state.remainingPhotos = shuffledPhotos.slice(photoSlots);
   render();
 }
 
@@ -159,6 +164,29 @@ function shuffle(items) {
 function photoCaption(photoPath) {
   const configured = gameConfig.finalReveal?.photos?.find((photo) => photo.src === photoPath);
   return configured?.caption || "A memory worth keeping";
+}
+
+function photoClass(photoPath) {
+  return /img_dp_ind_2\.(jpe?g)$/i.test(photoPath) ? " photo--full-frame" : "";
+}
+
+function bindPhotoFallbacks(container) {
+  container.querySelectorAll("img[data-photo-path]").forEach((img) => {
+    img.addEventListener("error", () => {
+      if (img.dataset.fallbackTried === "true") {
+        img.closest("figure")?.remove();
+        return;
+      }
+
+      const currentPath = img.dataset.photoPath;
+      const alternatePath = currentPath.replace(/\.(jpeg|jpg)$/i, (extension) =>
+        extension.toLowerCase() === ".jpg" ? ".jpeg" : ".jpg",
+      );
+      img.dataset.fallbackTried = "true";
+      img.dataset.photoPath = alternatePath;
+      img.src = assetUrl(alternatePath);
+    });
+  });
 }
 
 function renderQuestion() {
@@ -182,8 +210,8 @@ function renderQuestion() {
     </header>
     <div class="question-layout question-enter">
       <div class="question-memory" aria-label="A memory for this question">
-        ${memories.map((photo, i) => `<figure class="question-photo question-photo--${(i % 3) + 1}">
-          <div class="question-photo__image"><img src="${assetUrl(photo)}" alt="A photo memory" loading="eager" fetchpriority="high" decoding="sync" /></div>
+        ${memories.map((photo, i) => `<figure class="question-photo question-photo--${(i % 3) + 1}${photoClass(photo)}">
+          <div class="question-photo__image"><img src="${assetUrl(photo)}" data-photo-path="${escapeHtml(photo)}" alt="A photo memory" loading="eager" fetchpriority="high" decoding="sync" /></div>
           <figcaption>${escapeHtml(photoCaption(photo))}</figcaption>
         </figure>`).join("")}
       </div>
@@ -217,6 +245,7 @@ function renderQuestion() {
   });
 
   app.appendChild(section);
+  bindPhotoFallbacks(section);
 }
 
 function onSelectAnswer(index) {
@@ -341,6 +370,7 @@ function renderReveal() {
     { key: "bridge", class: "reveal-bridge", html: escapeHtml(f.bridge) },
     { key: "coda", class: "reveal-coda", html: escapeHtml(f.coda) },
     { key: "message", class: "reveal-message", html: multilineHtml(f.personalMessage) },
+    { key: "remainingPhotos", class: "reveal-memories", photos: true },
     { key: "restart", class: "reveal-actions", restart: true },
   ];
 
@@ -356,6 +386,20 @@ function renderReveal() {
       inner += `<button type="button" class="btn btn--ghost reveal-step--new" data-action="restart">${escapeHtml(f.restartLabel)}</button>`;
       return;
     }
+    if (step.photos) {
+      if (state.remainingPhotos.length) {
+        inner += `<section class="final-memories reveal-step--new" aria-label="More memories">
+          <p class="final-memories__eyebrow">The memories still waiting to be seen</p>
+          <div class="final-memories__grid">
+            ${state.remainingPhotos.map((photo, i) => `<figure class="final-memory final-memory--${(i % 4) + 1}${photoClass(photo)}">
+              <div class="final-memory__image"><img src="${assetUrl(photo)}" data-photo-path="${escapeHtml(photo)}" alt="A birthday memory" loading="eager" decoding="sync" /></div>
+              <figcaption>${escapeHtml(photoCaption(photo))}</figcaption>
+            </figure>`).join("")}
+          </div>
+        </section>`;
+      }
+      return;
+    }
     const isNew = step.key === visible[visible.length - 1]?.key;
     inner += `<p class="${step.class} reveal-step${isNew ? " reveal-step--new" : ""}">${step.html}</p>`;
   });
@@ -363,6 +407,7 @@ function renderReveal() {
 
   section.innerHTML = inner;
   app.appendChild(section);
+  bindPhotoFallbacks(section);
 
   const restartBtn = section.querySelector('[data-action="restart"]');
   if (restartBtn) {
@@ -384,6 +429,7 @@ function resetExperience() {
   state.surpriseStep = 0;
   state.revealStep = 0;
   state.photoAssignments = [];
+  state.remainingPhotos = [];
   render();
 }
 

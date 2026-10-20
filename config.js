@@ -127,7 +127,7 @@ export const gameConfig = {
     leadIn: "One last thing…",
     line1: "You got all the important ones right.",
     line2: "But the answer was never one thing.",
-    line3: "It's everythingyou.",
+    line3: "It's everything you.",
   },
 
   fakeScore: {
@@ -138,31 +138,34 @@ export const gameConfig = {
   },
 
   finalReveal: {
-    label: "Okay.\nEnough questions.",
-    headline: "There was never really a test.",
+    label: "Happy birthday, my love.\nOne last little thing.",
+    headline: "You are the brightest part of my universe.",
     subhead:
-      "I just wanted to see if you could guess\nwhat I see when I look at you.",
-    mainAnswer: "It's your smile.",
-    bridge: "But honestly…",
-    coda: "It's all of it.",
-    personalMessage: `YOUR PERSONAL MESSAGE GOES HERE
+      "I just wanted to show you\nwhat I see when I look at you.",
+    mainAnswer: "It's the smiles you bring into my universe.",
+    bridge: "The ones that make every place feel like home.",
+    coda: "And honestly… it's all of you.",
+    personalMessage: `Happy birthday, my love.
 
-Somehow, you make ordinary days feel a little less ordinary.
-And I don't think I tell you that enough.`,
+From surreal Bali mornings to dreamy Swiss rides and every serene sunset in between, my entire world has found its home in you. Through the sartorial elegance of your sarees and anarkalis, your stolen glances, and sweet candour, you remain the epitome of ebullience, optimism, and my greatest joy.
+
+This year feels quietly special. Whatever waits beyond it, I want to meet it with you. You mean more to me than words can hold. You are the smile that doesn’t just light up a room—it lights up my entire universe.
+
+I wish you a lifetime of boundless success, endless laughter, and vibrant warmth. Never lose that endearing spark, winsome smile, and radiant grace that make you so endlessly cherished by everyone around you. Here’s to you, and to your brightest tomorrows. Happy Birthday, Meri Pyaari Tweety :)!`,
     // Add your own bold, short memory below each photo (keep each one under 10 words).
     // The gallery automatically uses every image in public/assets/photos/.
     photos: [
       { src: "assets/photos/img_dp_bali_1.jpeg", caption: "Bintang Bali Resort— Chill vibes and slow mornings" },
       { src: "assets/photos/img_dp_ind_1.jpeg", caption: "Elan Mall — the Fire, Water, Earth, Roses and Us" },
-      { src: "assets/photos/img_dp_ind_2.jpeg", caption: "Humari Engagement — Our Hearts Always Dancing Together" },
+      { src: "assets/photos/img_dp_ind_2.jpg", caption: "Humari Engagement — Our Hearts Always Dancing Together" },
       { src: "assets/photos/img_parul_bali_1.jpg", caption: "Lake Batur Bali — Boats, Topiaries, Mountains and You" },
       { src: "assets/photos/img_parul_bali_2.jpeg", caption: "Tanah Lot Bali — Getting Lost in the Ocean of your Eyes" },
       { src: "assets/photos/img_parul_cool_1.jpeg", caption: "American look — Epitome of Modernity and Elegance" },
       { src: "assets/photos/img_parul_cool_2.jpeg", caption: "Swings and You — A little ephemeral, a lot unforgettable" },
       { src: "assets/photos/img_parul_cool_3.jpeg", caption: "Sterling - Drenched in the Depths of BLYOU" },
-      { src: "assets/photos/img_parul_trad_1.jpeg", caption: "Meri Sohniye teri saree wali adaa wich main kho jawaan" },
-      { src: "assets/photos/img_dp_cool_1.jpg", caption: "Purple Elements, Black Shades and Me Forever Falling for you" },
-      { src: "assets/photos/img_dp_bern_1.jpg", caption: "Snowy mountains, Deep Lakes and Dreamy rides, My Swiss resides in you" },
+      { src: "assets/photos/img_parul_trad_1.png", caption: "Meri Sohniye teri saree wali adaa wich main kho jawaan" },
+      { src: "assets/photos/img_dp_cool_1.png", caption: "Purple elements, black shades, and me falling for you" },
+      { src: "assets/photos/img_dp_bern_1.jpeg", caption: "Snowy mountains, deep lakes, and my Swiss resides in you" },
       { src: "assets/photos/img_parul_tulip.jpg", caption: "Petals in the glass, all my universe in your eyes." },
     ],
     restartLabel: "Start over ↗",
